@@ -1,0 +1,14 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/maps/api/place/update/json"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "UpdatePlaceApiResponse_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
