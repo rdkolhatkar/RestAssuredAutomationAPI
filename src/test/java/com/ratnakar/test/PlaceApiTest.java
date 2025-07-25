@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class AddPlaceApiTest {
+public class PlaceApiTest {
 
     String placeID;
     @Test
