@@ -3,6 +3,7 @@ package com.ratnakar.test;
 import com.ratnakar.data.AddPlaceApiPayLoad;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -65,5 +66,19 @@ public class PlaceApiTest {
                 .then().log().all().assertThat().statusCode(200).body("msg", equalTo("Address successfully updated"));
     }
     // Now we will be calling the GET Place API to check if our address is successfully updated or not
+    @Test
+    public void getPlaceApiTest(){
+        RestAssured.baseURI = "https://rahulshettyacademy.com";
+        String updatedAddress = "70 Summer walk, USA";
+        String getPlaceApiResponse = given().log().all().queryParam("key", "qaclick123")
+                .queryParam("place_id", placeID)
+                .when().get("/maps/api/place/get/json")
+                .then().assertThat().log().all().statusCode(200).extract().response().asString();
+        System.out.println(getPlaceApiResponse);
+        JsonPath jsonPath = new JsonPath(getPlaceApiResponse);
+        String extractedAddress = jsonPath.getString("address");
+        Assert.assertEquals(updatedAddress, extractedAddress);
+        }
+
 }
 
