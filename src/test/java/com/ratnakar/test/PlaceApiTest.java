@@ -1,6 +1,7 @@
 package com.ratnakar.test;
 
 import com.ratnakar.data.AddPlaceApiPayLoad;
+import com.ratnakar.utils.JsonPathMethod;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.junit.Assert;
@@ -75,8 +76,8 @@ public class PlaceApiTest {
                 .when().get("/maps/api/place/get/json")
                 .then().assertThat().log().all().statusCode(200).extract().response().asString();
         System.out.println(getPlaceApiResponse);
-        JsonPath jsonPath = new JsonPath(getPlaceApiResponse);
-        String extractedAddress = jsonPath.getString("address");
+        JsonPath responseObject = JsonPathMethod.rawDataToJsonConverter(getPlaceApiResponse);
+        String extractedAddress = responseObject.getString("address");
         Assert.assertEquals(updatedAddress, extractedAddress);
         }
 
