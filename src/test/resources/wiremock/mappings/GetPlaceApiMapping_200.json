@@ -1,0 +1,14 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "url": "/maps/api/place/get/json"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "GetPlaceApiResponse_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
