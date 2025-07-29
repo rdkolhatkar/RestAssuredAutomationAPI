@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "purchaseAmount": 910,
+    "website": "rahulshettyacademy.com"
+  },
+  "courses": [
+    {
+      "title": "Selenium WebDriver",
+      "price": 50,
+      "copies": 6
+    },
+    {
+      "title": "Cypress",
+      "price": 40,
+      "copies": 4
+    },
+    {
+      "title": "RestAssued API Automation",
+      "price": 45,
+      "copies": 10
+    }
+  ]
+}
