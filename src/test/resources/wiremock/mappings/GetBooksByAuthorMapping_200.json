@@ -1,0 +1,14 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPattern": "/Library/GetBook.php\\?AuthorName=.*"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "GetBooksByAuthorResponse_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
