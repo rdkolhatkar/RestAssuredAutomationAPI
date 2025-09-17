@@ -5,10 +5,15 @@ public class CourseApiPayLoad {
     public static String courseApiResponsePayload(){
         return "{\n" +
                 "  \"dashboard\": {\n" +
-                "    \"purchaseAmount\": 910,\n" +
+                "    \"purchaseAmount\": 2930,\n" +
                 "    \"website\": \"rahulshettyacademy.com\"\n" +
                 "  },\n" +
                 "  \"courses\": [\n" +
+                "    {\n" +
+                "      \"title\": \"Selenium Python\",\n" +
+                "      \"price\": 45,\n" +
+                "      \"copies\": 5\n" +
+                "    },\n" +
                 "    {\n" +
                 "      \"title\": \"Selenium WebDriver\",\n" +
                 "      \"price\": 50,\n" +
@@ -23,6 +28,16 @@ public class CourseApiPayLoad {
                 "      \"title\": \"RestAssued API Automation\",\n" +
                 "      \"price\": 45,\n" +
                 "      \"copies\": 10\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"title\": \"Appium Mobile Testing\",\n" +
+                "      \"price\": 85,\n" +
+                "      \"copies\": 20\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"title\": \"Performance Test With Gatling\",\n" +
+                "      \"price\": 95,\n" +
+                "      \"copies\": 1\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}";

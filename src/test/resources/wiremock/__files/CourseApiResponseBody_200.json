@@ -1,9 +1,14 @@
 {
   "dashboard": {
-    "purchaseAmount": 910,
+    "purchaseAmount": 2930,
     "website": "rahulshettyacademy.com"
   },
   "courses": [
+    {
+      "title": "Selenium Python",
+      "price": 45,
+      "copies": 5
+    },
     {
       "title": "Selenium WebDriver",
       "price": 50,
@@ -18,6 +23,16 @@
       "title": "RestAssued API Automation",
       "price": 45,
       "copies": 10
+    },
+    {
+      "title": "Appium Mobile Testing",
+      "price": 85,
+      "copies": 20
+    },
+    {
+      "title": "Performance Test With Gatling",
+      "price": 95,
+      "copies": 1
     }
   ]
 }
