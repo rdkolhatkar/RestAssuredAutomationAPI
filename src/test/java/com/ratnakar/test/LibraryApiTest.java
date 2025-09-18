@@ -1,6 +1,7 @@
 package com.ratnakar.test;
 
 import com.ratnakar.data.AddPlaceApiPayLoad;
+import com.ratnakar.data.LibraryApiPayload;
 import com.ratnakar.utils.JsonPathMethod;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -14,7 +15,7 @@ public class LibraryApiTest {
         // Add Book API
         RestAssured.baseURI = "http://216.10.245.166";
         String libraryApiResponse = given().log().all().header("Content-Type", "application/json")
-                .body(AddPlaceApiPayLoad.addPlacePayLoad())
+                .body(LibraryApiPayload.addBookPayload())
                 .when().post("/Library/Addbook.php")
                 .then().log().all().assertThat().statusCode(200)
                 .extract().response().asString();
