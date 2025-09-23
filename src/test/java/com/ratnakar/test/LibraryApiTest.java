@@ -24,4 +24,14 @@ public class LibraryApiTest {
         String id = jsonPath.getString("ID");
         System.out.println(id);
     }
+    @Test
+    public void parameterizedPayloadTest(){
+        RestAssured.baseURI = "http://216.10.245.166";
+        String libraryApiResponse = given().log().all().header("Content-Type", "application/json")
+                .body(LibraryApiPayload.AddBookPayload("887", "dfsgh")) // Passing dynamic values for "aisle" & "isbn"
+                .when().post("/Library/Addbook.php")
+                .then().log().all().assertThat().statusCode(200)
+                .extract().response().asString();
+        System.out.println(libraryApiResponse);
+    }
 }

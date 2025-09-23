@@ -10,4 +10,14 @@ public class LibraryApiPayload {
                 "}\n";
         return addBookRequestBody;
     }
+
+    public static String AddBookPayload(String aisle, String isbn){
+        String addBookRequestBody = "{\n" +
+                "  \"name\": \"Learn Appium Automation with Java\",\n" +
+                "  \"isbn\": \""+isbn+"\",\n" +
+                "  \"aisle\": \""+aisle+"\",\n" +
+                "  \"author\": \"John foe\"\n" +
+                "}\n";
+        return addBookRequestBody;
+    }
 }
