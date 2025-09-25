@@ -20,4 +20,10 @@ public class LibraryApiPayload {
                 "}\n";
         return addBookRequestBody;
     }
+
+    public static String DeleteBookPayload(String id) {
+        return "{\n" +
+                "  \"ID\": \"" + id + "\"\n" +
+                "}";
+    }
 }

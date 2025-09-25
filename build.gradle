@@ -15,8 +15,17 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter")
     implementation("io.rest-assured:rest-assured:5.4.0")
     implementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    implementation("org.testng:testng:7.11.0")
+
+    // Testing Dependencies
+    testImplementation("org.testng:testng:7.11.0")
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 test {
     useJUnitPlatform()
+}
+
+test {
+    useTestNG()
 }

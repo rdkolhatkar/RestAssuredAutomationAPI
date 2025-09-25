@@ -5,7 +5,12 @@ import com.ratnakar.utils.JsonPathMethod;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+//import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -79,7 +84,34 @@ public class PlaceApiTest {
         JsonPath responseObject = JsonPathMethod.rawDataToJsonConverter(getPlaceApiResponse);
         String extractedAddress = responseObject.getString("address");
         Assert.assertEquals(updatedAddress, extractedAddress);
-        }
+    }
+    @Test
+    public void addPlaceApiStaticJsonTest() throws IOException {
+        RestAssured.baseURI = "https://rahulshettyacademy.com";
+
+        // Read the static JSON payload from file
+        String requestBody = new String(Files.readAllBytes(
+                Paths.get("src/test/resources/JsonData/AddPlace.json")
+        ));
+
+        String response = given().log().all()
+                .queryParam("key", "qaclick123")
+                .header("Content-Type", "application/json")
+                .body(requestBody) // using static JSON payload
+                .when().post("/maps/api/place/add/json")
+                .then().log().all()
+                .assertThat().statusCode(200)
+                .body("scope", equalTo("APP"))
+                .extract().response().asString();
+
+        System.out.println(response);
+
+        // Extract place_id from response
+        JsonPath jsonPath = new JsonPath(response);
+        placeID = jsonPath.getString("place_id");
+    }
+
+
 
 }
 
