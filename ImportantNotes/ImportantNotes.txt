@@ -45,3 +45,7 @@ Here’s a simpler, step-by-step plain text version of your notes without code b
      `curl -X GET -H "Authorization: Basic am9obmRvZUBleGFtcGxlLmNvbTpBQlMxMjN4eXo0NTY=" -H "Content-Type: application/json" "https://your-domain.atlassian.net/rest/api/2/issue/QA-31"`
 
 ---
+
+There are some online Websites are also available for BASE64 encoding
+Website Url: https://www.base64encode.org/
+With this website we can directly do the encoding by passing the "user@example.com:api_token_string"
