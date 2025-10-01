@@ -1,3 +1,47 @@
-Jira API
+Jira API Web Site: https://ratnakarkolhatkar.atlassian.net/jira/software/projects/SCRUM/boards/1
+Jira Cloud API Documentation: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#about
+Jira Cloud API Basic Auth Token Generation Url: https://id.atlassian.com/manage-profile/security/api-tokens
 
-Web Site: https://ratnakarkolhatkar.atlassian.net/jira/software/projects/SCRUM/boards/1
+JWT Basic Auth Token will be valid only for 1 week after that it will expire as per Atlassian policy.
+
+To invoke the Jira API we have to send the HTTP_AUTH_TOKEN as a query parameter in the BASE64 encoding format.
+Jira will decode it internally and give us the API response.
+
+Here’s a simpler, step-by-step plain text version of your notes without code blocks cluttering it:
+
+---
+
+### 🔐 Steps to Construct & Send Basic Auth Headers for Jira API
+
+1. **Generate an API token**
+
+   * Go to [Jira API Tokens](https://id.atlassian.com/manage/api-tokens)
+   * Create a new token and copy it.
+
+2. **Form the credentials string**
+
+   * Format: `useremail:api_token`
+   * Example: `johndoe@example.com:ABC123xyz456`
+
+3. **BASE64 encode the string**
+
+   * **Linux / Mac / Unix**: `echo -n "user@example.com:api_token_string" | base64`
+   * **Windows PowerShell**:
+
+     1. `$Text = "user@example.com:api_token_string"`
+     2. `$Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)`
+     3. `$EncodedText = [Convert]::ToBase64String($Bytes)`
+     4. `$EncodedText`
+   * Example output: `am9obmRvZUBleGFtcGxlLmNvbTpBQlMxMjN4eXo0NTY=`
+
+4. **Create the Authorization header**
+
+   * Format: `Authorization: Basic <BASE64_ENCODED_STRING>`
+   * Example: `Authorization: Basic am9obmRvZUBleGFtcGxlLmNvbTpBQlMxMjN4eXo0NTY=`
+
+5. **Send the request**
+
+   * Example curl command:
+     `curl -X GET -H "Authorization: Basic am9obmRvZUBleGFtcGxlLmNvbTpBQlMxMjN4eXo0NTY=" -H "Content-Type: application/json" "https://your-domain.atlassian.net/rest/api/2/issue/QA-31"`
+
+---
