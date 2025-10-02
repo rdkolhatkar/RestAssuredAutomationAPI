@@ -1,0 +1,42 @@
+---
+
+### **WireMock Multipart API Invocation Checklist**
+
+1. ✅ **Start WireMock**
+
+* Ensure WireMock server is running with the mapping containing `multipartPatterns`.
+
+2. ✅ **Set Request Method & URL**
+
+* Use the correct HTTP method (`POST`).
+* Use the endpoint URL or URL pattern defined in the mapping.
+
+3. ✅ **Add Required Headers**
+
+* `Content-Type: multipart/form-data`
+* Any authentication headers (`Authorization`, etc.)
+* Any additional headers (`X-Atlassian-Token` for Jira attachments)
+
+4. ✅ **Prepare Multipart Body**
+
+* Form-data **key** matches `"name"` in `multipartPatterns` (e.g., `file`).
+* Form-data **value** matches `"equalTo"` in `multipartPatterns` (e.g., `TicketBookingApi_Error.png`).
+
+5. ✅ **Send the Request**
+
+* Trigger the API with your client (Postman, curl, or code).
+
+6. ✅ **WireMock Matches the Request**
+
+* Checks method, URL, headers, and multipart key/value.
+
+7. ✅ **Receive Response**
+
+* WireMock returns the stubbed response (status code, body, headers) if everything matches.
+* If the request doesn’t match, WireMock returns the default response (usually 404).
+
+8. ✅ **Verify Response**
+
+* Confirm the status code and body match your mapping definition.
+
+---

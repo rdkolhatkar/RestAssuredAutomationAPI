@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "9ef8c6e0-cfe7-4a05-8b31-7b9faf410032",
+		"name": "Ratnakar Agile Works Jira API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19864596",
+		"_collection_link": "https://warped-equinox-530609.postman.co/workspace/API_Automation_Testing~291dac4f-80e4-4c02-8fe9-ca5282612efe/collection/19864596-9ef8c6e0-cfe7-4a05-8b31-7b9faf410032?action=share&source=collection_link&creator=19864596"
+	},
+	"item": [
+		{
+			"name": "Create Bug",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cmF0bmFrYXJrb2xoYXRrYXJAZ21haWwuY29tOkFUQVRUM3hGZkdGMGt5aUFTNUhiVkYyc2pTcE9vM3NrOTQwNzJSWEJJNEhFMk5qS3QtLTZ0bGJHVTc5Z3FVQUhEYXRndjB0Q0hoVGZDSldISVh1TXRYdDdzanE0LWJvWkpQR3VLTDhvV2p4N0FNdDY1ZmJmcWxlSy1YdjhZVVFqa016eWE5X2Z3YWgyaVNPM3Z3bHBiTDBWc1lvZTlPbU1NdUJsOFZNSzY4aE5vUDZXaXFxQURpST02NkRDOTU3Qw==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fields\": {\r\n    \"project\": {\r\n      \"key\": \"SCRUM\" \r\n    },\r\n    \"issuetype\": {\r\n      \"name\": \"Bug\"\r\n    },\r\n    \"summary\": \"Ticket Booking API missing mandatory <userEmail> field\",\r\n    \"description\": {\r\n      \"type\": \"doc\",\r\n      \"version\": 1,\r\n      \"content\": [\r\n        {\r\n          \"type\": \"paragraph\",\r\n          \"content\": [\r\n            {\r\n              \"text\": \"The Ticket Booking API request fails because the mandatory <userEmail> field is missing in the request body.\",\r\n              \"type\": \"text\"\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"type\": \"paragraph\",\r\n          \"content\": [\r\n            {\r\n              \"text\": \"Impact:\",\r\n              \"type\": \"text\",\r\n              \"marks\": [{ \"type\": \"strong\" }]\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"type\": \"bulletList\",\r\n          \"content\": [\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Prevents users from booking tickets successfully.\", \"type\": \"text\" }] }]\r\n            },\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Affects business-critical functionality.\", \"type\": \"text\" }] }]\r\n            },\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Could lead to customer dissatisfaction and revenue loss.\", \"type\": \"text\" }] }]\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"type\": \"paragraph\",\r\n          \"content\": [\r\n            {\r\n              \"text\": \"Steps to Reproduce:\",\r\n              \"type\": \"text\",\r\n              \"marks\": [{ \"type\": \"strong\" }]\r\n            }\r\n          ]\r\n        },\r\n        {\r\n          \"type\": \"orderedList\",\r\n          \"content\": [\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Trigger the Ticket Booking API without the <userEmail> field in the request body.\", \"type\": \"text\" }] }]\r\n            },\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Observe the API response.\", \"type\": \"text\" }] }]\r\n            },\r\n            {\r\n              \"type\": \"listItem\",\r\n              \"content\": [{ \"type\": \"paragraph\", \"content\": [{ \"text\": \"Verify that the booking fails and the error message indicates a missing mandatory parameter.\", \"type\": \"text\" }] }]\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    },\r\n    \"assignee\": {\r\n      \"id\": \"61d038f8a54af90069437aed\"\r\n    },\r\n    \"labels\": [\r\n      \"FunctionalDefect\"\r\n    ]\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue",
+					"protocol": "https",
+					"host": [
+						"ratnakarkolhatkar",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Attachment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Atlassian-Token",
+						"value": "no-check",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cmF0bmFrYXJrb2xoYXRrYXJAZ21haWwuY29tOkFUQVRUM3hGZkdGMGt5aUFTNUhiVkYyc2pTcE9vM3NrOTQwNzJSWEJJNEhFMk5qS3QtLTZ0bGJHVTc5Z3FVQUhEYXRndjB0Q0hoVGZDSldISVh1TXRYdDdzanE0LWJvWkpQR3VLTDhvV2p4N0FNdDY1ZmJmcWxlSy1YdjhZVVFqa016eWE5X2Z3YWgyaVNPM3Z3bHBiTDBWc1lvZTlPbU1NdUJsOFZNSzY4aE5vUDZXaXFxQURpST02NkRDOTU3Qw==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Ratnakar/Desktop/TicketBookingAPI_Error.PNG"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/10039/attachments",
+					"protocol": "https",
+					"host": [
+						"ratnakarkolhatkar",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue",
+						"10039",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

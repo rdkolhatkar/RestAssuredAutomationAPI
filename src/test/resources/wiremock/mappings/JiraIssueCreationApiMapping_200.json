@@ -1,0 +1,22 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/rest/api/3/issue",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      },
+      "Authorization": {
+        "matches": "Basic .*"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "bodyFileName": "JiraCreateIssueResponseBody_201.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

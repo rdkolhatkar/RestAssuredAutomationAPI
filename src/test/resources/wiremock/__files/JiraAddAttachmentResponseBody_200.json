@@ -1,0 +1,27 @@
+[
+  {
+    "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/attachment/10034",
+    "id": "10034",
+    "filename": "TicketBookingAPI_Error.PNG",
+    "author": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/user?accountId=61d038f8a54af90069437aed",
+      "accountId": "61d038f8a54af90069437aed",
+      "emailAddress": "ratnakarkolhatkar@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "24x24": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "16x16": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "32x32": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png"
+      },
+      "displayName": "ratnakar kolhatkar",
+      "active": true,
+      "timeZone": "Asia/Calcutta",
+      "accountType": "atlassian"
+    },
+    "created": "2025-10-02T21:21:30.723+0530",
+    "size": 68543,
+    "mimeType": "image/png",
+    "content": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/attachment/content/10034",
+    "thumbnail": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/attachment/thumbnail/10034"
+  }
+]

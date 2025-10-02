@@ -7,6 +7,9 @@ JWT Basic Auth Token will be valid only for 1 week after that it will expire as 
 To invoke the Jira API we have to send the HTTP_AUTH_TOKEN as a query parameter in the BASE64 encoding format.
 Jira will decode it internally and give us the API response.
 
+Jira API create issue documentation link: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-types/#api-rest-api-3-issuetype-post
+Jira API Add issue attachment documentation link: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-attachments/#api-rest-api-3-issue-issueidorkey-attachments-post
+
 Here’s a simpler, step-by-step plain text version of your notes without code blocks cluttering it:
 
 ---
