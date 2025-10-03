@@ -95,6 +95,71 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Issue",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cmF0bmFrYXJrb2xoYXRrYXJAZ21haWwuY29tOkFUQVRUM3hGZkdGMGt5aUFTNUhiVkYyc2pTcE9vM3NrOTQwNzJSWEJJNEhFMk5qS3QtLTZ0bGJHVTc5Z3FVQUhEYXRndjB0Q0hoVGZDSldISVh1TXRYdDdzanE0LWJvWkpQR3VLTDhvV2p4N0FNdDY1ZmJmcWxlSy1YdjhZVVFqa016eWE5X2Z3YWgyaVNPM3Z3bHBiTDBWc1lvZTlPbU1NdUJsOFZNSzY4aE5vUDZXaXFxQURpST02NkRDOTU3Qw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/10069",
+					"protocol": "https",
+					"host": [
+						"ratnakarkolhatkar",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue",
+						"10069"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Issue",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cmF0bmFrYXJrb2xoYXRrYXJAZ21haWwuY29tOkFUQVRUM3hGZkdGMGt5aUFTNUhiVkYyc2pTcE9vM3NrOTQwNzJSWEJJNEhFMk5qS3QtLTZ0bGJHVTc5Z3FVQUhEYXRndjB0Q0hoVGZDSldISVh1TXRYdDdzanE0LWJvWkpQR3VLTDhvV2p4N0FNdDY1ZmJmcWxlSy1YdjhZVVFqa016eWE5X2Z3YWgyaVNPM3Z3bHBiTDBWc1lvZTlPbU1NdUJsOFZNSzY4aE5vUDZXaXFxQURpST02NkRDOTU3Qw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/10069",
+					"protocol": "https",
+					"host": [
+						"ratnakarkolhatkar",
+						"atlassian",
+						"net"
+					],
+					"path": [
+						"rest",
+						"api",
+						"3",
+						"issue",
+						"10069"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
