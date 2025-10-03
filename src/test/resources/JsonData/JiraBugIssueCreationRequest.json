@@ -1,0 +1,86 @@
+{
+  "fields": {
+    "project": {
+      "key": "SCRUM"
+    },
+    "issuetype": {
+      "name": "Bug"
+    },
+    "summary": "Ticket Booking API missing mandatory <userEmail> field",
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "The Ticket Booking API request fails because the mandatory <userEmail> field is missing in the request body.",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Impact:",
+              "type": "text",
+              "marks": [{ "type": "strong" }]
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Prevents users from booking tickets successfully.", "type": "text" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Affects business-critical functionality.", "type": "text" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Could lead to customer dissatisfaction and revenue loss.", "type": "text" }] }]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "text": "Steps to Reproduce:",
+              "type": "text",
+              "marks": [{ "type": "strong" }]
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Trigger the Ticket Booking API without the <userEmail> field in the request body.", "type": "text" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Observe the API response.", "type": "text" }] }]
+            },
+            {
+              "type": "listItem",
+              "content": [{ "type": "paragraph", "content": [{ "text": "Verify that the booking fails and the error message indicates a missing mandatory parameter.", "type": "text" }] }]
+            }
+          ]
+        }
+      ]
+    },
+    "assignee": {
+      "id": "61d038f8a54af90069437aed"
+    },
+    "labels": [
+      "FunctionalDefect"
+    ]
+  }
+}

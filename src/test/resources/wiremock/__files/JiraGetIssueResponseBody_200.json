@@ -1,0 +1,311 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "10069",
+  "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/10069",
+  "key": "SCRUM-6",
+  "fields": {
+    "statuscategorychangedate": "2025-10-03T14:21:15.914+0530",
+    "issuetype": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issuetype/10002",
+      "id": "10002",
+      "description": "Bugs track problems or errors.",
+      "iconUrl": "https://ratnakarkolhatkar.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+      "name": "Bug",
+      "subtask": false,
+      "avatarId": 10303,
+      "entityId": "c0227997-c6e7-47b5-af8b-83f9ec4649e8",
+      "hierarchyLevel": 0
+    },
+    "timespent": null,
+    "project": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/project/10000",
+      "id": "10000",
+      "key": "SCRUM",
+      "name": "Ratnakar Agile Works",
+      "projectTypeKey": "software",
+      "simplified": true,
+      "avatarUrls": {
+        "48x48": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414",
+        "24x24": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=small",
+        "16x16": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=xsmall",
+        "32x32": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/universal_avatar/view/type/project/avatar/10414?size=medium"
+      }
+    },
+    "fixVersions": [],
+    "aggregatetimespent": null,
+    "statusCategory": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/statuscategory/2",
+      "id": 2,
+      "key": "new",
+      "colorName": "blue-gray",
+      "name": "To Do"
+    },
+    "customfield_10035": null,
+    "resolution": null,
+    "resolutiondate": null,
+    "workratio": -1,
+    "issuerestriction": {
+      "issuerestrictions": {},
+      "shouldDisplay": true
+    },
+    "watches": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/SCRUM-6/watchers",
+      "watchCount": 1,
+      "isWatching": true
+    },
+    "lastViewed": null,
+    "created": "2025-10-03T14:21:15.614+0530",
+    "customfield_10020": null,
+    "customfield_10021": null,
+    "priority": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/priority/3",
+      "iconUrl": "https://ratnakarkolhatkar.atlassian.net/images/icons/priorities/medium_new.svg",
+      "name": "Medium",
+      "id": "3"
+    },
+    "labels": [
+      "FunctionalDefect"
+    ],
+    "customfield_10016": null,
+    "customfield_10019": "0|i0000n:",
+    "timeestimate": null,
+    "aggregatetimeoriginalestimate": null,
+    "versions": [],
+    "issuelinks": [],
+    "assignee": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/user?accountId=61d038f8a54af90069437aed",
+      "accountId": "61d038f8a54af90069437aed",
+      "emailAddress": "ratnakarkolhatkar@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "24x24": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "16x16": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "32x32": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png"
+      },
+      "displayName": "ratnakar kolhatkar",
+      "active": true,
+      "timeZone": "Asia/Calcutta",
+      "accountType": "atlassian"
+    },
+    "updated": "2025-10-03T14:21:15.699+0530",
+    "status": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/status/10000",
+      "description": "",
+      "iconUrl": "https://ratnakarkolhatkar.atlassian.net/",
+      "name": "To Do",
+      "id": "10000",
+      "statusCategory": {
+        "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/statuscategory/2",
+        "id": 2,
+        "key": "new",
+        "colorName": "blue-gray",
+        "name": "To Do"
+      }
+    },
+    "components": [],
+    "timeoriginalestimate": null,
+    "description": {
+      "type": "doc",
+      "version": 1,
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "The Ticket Booking API request fails because the mandatory <userEmail> field is missing in the request body."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Impact:",
+              "marks": [
+                {
+                  "type": "strong"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Prevents users from booking tickets successfully."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Affects business-critical functionality."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Could lead to customer dissatisfaction and revenue loss."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Steps to Reproduce:",
+              "marks": [
+                {
+                  "type": "strong"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Trigger the Ticket Booking API without the <userEmail> field in the request body."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Observe the API response."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Verify that the booking fails and the error message indicates a missing mandatory parameter."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "timetracking": {},
+    "customfield_10015": null,
+    "security": null,
+    "attachment": [],
+    "aggregatetimeestimate": null,
+    "summary": "Ticket Booking API missing mandatory <userEmail> field",
+    "creator": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/user?accountId=61d038f8a54af90069437aed",
+      "accountId": "61d038f8a54af90069437aed",
+      "emailAddress": "ratnakarkolhatkar@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "24x24": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "16x16": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "32x32": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png"
+      },
+      "displayName": "ratnakar kolhatkar",
+      "active": true,
+      "timeZone": "Asia/Calcutta",
+      "accountType": "atlassian"
+    },
+    "subtasks": [],
+    "reporter": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/user?accountId=61d038f8a54af90069437aed",
+      "accountId": "61d038f8a54af90069437aed",
+      "emailAddress": "ratnakarkolhatkar@gmail.com",
+      "avatarUrls": {
+        "48x48": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "24x24": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "16x16": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png",
+        "32x32": "https://secure.gravatar.com/avatar/1c5ddfcd0f3c7598ec2a8035b7adf5ea?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FRK-1.png"
+      },
+      "displayName": "ratnakar kolhatkar",
+      "active": true,
+      "timeZone": "Asia/Calcutta",
+      "accountType": "atlassian"
+    },
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_10001": null,
+    "environment": null,
+    "duedate": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "votes": {
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/SCRUM-6/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "comment": {
+      "comments": [],
+      "self": "https://ratnakarkolhatkar.atlassian.net/rest/api/3/issue/10069/comment",
+      "maxResults": 0,
+      "total": 0,
+      "startAt": 0
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  }
+}
