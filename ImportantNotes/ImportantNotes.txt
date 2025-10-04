@@ -52,3 +52,20 @@ Here’s a simpler, step-by-step plain text version of your notes without code b
 There are some online Websites are also available for BASE64 encoding
 Website Url: https://www.base64encode.org/
 With this website we can directly do the encoding by passing the "user@example.com:api_token_string"
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OAuth Authentication of Rest API "rahulshettyacademy"
+
+API Contract download
+******************************************************************
+Authorization Server EndPoint: https://rahulshettyacademy.com/oauthapi/oauth2/resourceOwner/token
+HTTP Method : POST
+Form parameters :
+client_id: 692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com
+client_secret:  erZOWM9g3UtwNRj340YYaK_W
+grant_type:   client_credentials
+scope:  trust
+******************************************************************
+GetCourseDetails EndPoint (Secured by OAuth) : https://rahulshettyacademy.com/oauthapi/getCourseDetails
+HTTP Method : GET
+Query Parameter : access_token
