@@ -1,0 +1,24 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/oauthapi/oauth2/resourceOwner/token",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/x-www-form-urlencoded"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalTo": "client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&client_secret=erZOWM9g3UtwNRj340YYaK_W&grant_type=client_credentials&scope=trust"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "OAuthTokenApiResponse_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

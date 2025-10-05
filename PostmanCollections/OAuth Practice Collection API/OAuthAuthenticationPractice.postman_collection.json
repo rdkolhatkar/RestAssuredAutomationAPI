@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "2f45ae28-87dd-473c-95a7-22809c6c82d0",
+		"name": "OAuthAuthenticationPractice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19864596",
+		"_collection_link": "https://warped-equinox-530609.postman.co/workspace/API_Automation_Testing~291dac4f-80e4-4c02-8fe9-ca5282612efe/collection/19864596-2f45ae28-87dd-473c-95a7-22809c6c82d0?action=share&source=collection_link&creator=19864596"
+	},
+	"item": [
+		{
+			"name": "AuthorizationServer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "erZOWM9g3UtwNRj340YYaK_W",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "trust",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/oauthapi/oauth2/resourceOwner/token",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"oauthapi",
+						"oauth2",
+						"resourceOwner",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCourseDetailsAPI",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/oauthapi/getCourseDetails?access_token=uX8IQpM/IvZiTlEyC8oZaw==",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"oauthapi",
+						"getCourseDetails"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "uX8IQpM/IvZiTlEyC8oZaw=="
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

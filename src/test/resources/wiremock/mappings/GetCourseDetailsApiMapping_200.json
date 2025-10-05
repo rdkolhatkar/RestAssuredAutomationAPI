@@ -1,0 +1,19 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/oauthapi/getCourseDetails",
+    "queryParameters": {
+      "access_token": {
+        "equalTo": "Hz6wntXnKHr0xrqzDS1GSA=="
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "GetCourseDetailsApiResponse_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
