@@ -16,6 +16,7 @@ dependencies {
     implementation("io.rest-assured:rest-assured:5.4.0")
     implementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
     implementation("org.testng:testng:7.11.0")
+    implementation("tools.jackson.core:jackson-databind:3.0.0") // Required for POJO class Serialization & Deserialization
 
     // Testing Dependencies
     testImplementation("org.testng:testng:7.11.0")
