@@ -1,13 +1,32 @@
 package com.ratnakar.pojo;
 
+/**
+ * The main POJO (Plain Old Java Object) representing a user's course details.
+ * This class will be used as the root object when serializing or deserializing
+ * JSON responses in RestAssured automation.
+ *
+ * Each field here maps to a key in the JSON response.
+ */
 public class GetCourses {
+    // URL of the website or course provider
     private String url;
+
+    // Type of services offered (e.g., Education, Automation Training)
     private String services;
+
+    // Area of expertise (e.g., Testing, Automation, DevOps)
     private String expertise;
+
+    // Contains lists of all course categories like web, API, and mobile
     private CourseList courses;
+
+    // Name of the instructor or course provider
     private String instructor;
+
+    // Instructor's LinkedIn profile link
     private String linkedIn;
 
+    // Getters and Setters: used by RestAssured and Jackson to access JSON data
     public CourseList getCourses() {
         return courses;
     }
