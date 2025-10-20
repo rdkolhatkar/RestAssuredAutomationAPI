@@ -69,3 +69,5 @@ scope:  trust
 GetCourseDetails EndPoint (Secured by OAuth) : https://rahulshettyacademy.com/oauthapi/getCourseDetails
 HTTP Method : GET
 Query Parameter : access_token
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ecommerce API
