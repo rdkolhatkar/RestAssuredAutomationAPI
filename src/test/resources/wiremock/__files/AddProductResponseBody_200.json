@@ -1,0 +1,7 @@
+{
+  "message": "Product Added Successfully",
+  "productId": "prod_{{randomValue type='UUID'}}",
+  "productName": "{{jsonPath request.body '$.productName'}}",
+  "productCategory": "{{jsonPath request.body '$.productCategory'}}",
+  "productAddedBy": "{{jsonPath request.body '$.productAddedBy'}}"
+}

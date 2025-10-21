@@ -1,0 +1,25 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "DELETE",
+    "urlPattern": "/api/ecom/product/delete/[^/]+",
+    "headers": {
+      "Authorization": {
+        "matches": "Bearer .*"
+      }
+    },
+    "queryParameters": {
+      "id": {
+        "matches": "ord_.*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "DeleteProductResponseBody_200.json",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "transformers": ["response-template"]
+  }
+}

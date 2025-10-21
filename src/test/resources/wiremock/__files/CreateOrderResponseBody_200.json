@@ -1,0 +1,11 @@
+{
+  "message": "Order Placed Successfully",
+  "Orders": [
+    {
+      "country": "{{jsonPath request.body '$.country'}}",
+      "orderId": "ord_{{randomValue type='UUID'}}",
+      "productOrderedId": "{{jsonPath request.body '$.productOrderedId'}}",
+      "orderDate": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+    }
+  ]
+}

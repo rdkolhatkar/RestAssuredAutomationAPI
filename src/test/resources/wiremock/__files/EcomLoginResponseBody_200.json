@@ -1,0 +1,6 @@
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.{{randomValue length=16 type='ALPHANUMERIC'}}",
+  "userId": "user_{{randomValue type='UUID'}}",
+  "message": "Login successful",
+  "timestamp": "{{now format='yyyy-MM-dd'T'HH:mm:ssZ'}}"
+}

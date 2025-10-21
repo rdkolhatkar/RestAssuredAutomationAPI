@@ -1,0 +1,7 @@
+{
+  "message": "Product Deleted Successfully",
+  "deletedProductId": "{{request.pathSegments.[4]}}",
+  "orderId": "{{request.query.id}}",
+  "status": "SUCCESS",
+  "deletedAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+}

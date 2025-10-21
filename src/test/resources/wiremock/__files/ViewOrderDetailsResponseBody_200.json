@@ -1,0 +1,16 @@
+{
+  "data": {
+    "_id": "{{request.query.id}}",
+    "orderById": "user_{{randomValue type='UUID'}}",
+    "orderBy": "user{{randomValue length=4 type='ALPHANUMERIC'}}@example.com",
+    "productOrderedId": "prod_{{randomValue type='UUID'}}",
+    "productName": "qwerty",
+    "country": "India",
+    "productDescription": "Addidas Originals",
+    "productImage": "https://rahulshettyacademy.com/api/ecom/uploads/productImage_{{randomValue length=13 type='NUMERIC'}}.jpg",
+    "orderPrice": "11500",
+    "__v": 0,
+    "fetchedAt": "{{now format='yyyy-MM-dd HH:mm:ss'}}"
+  },
+  "message": "Orders fetched for customer Successfully"
+}
