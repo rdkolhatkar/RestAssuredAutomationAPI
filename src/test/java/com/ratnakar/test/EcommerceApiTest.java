@@ -1,5 +1,7 @@
 package com.ratnakar.test;
 
+import com.ratnakar.pojo.CreateOrderApiBase;
+import com.ratnakar.pojo.CreateOrderApiDetails;
 import com.ratnakar.pojo.EcommerceApiLoginTokenRequest;
 import com.ratnakar.pojo.EcommerceApiLoginTokenResponse;
 import io.restassured.builder.RequestSpecBuilder;
@@ -9,6 +11,8 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -55,6 +59,28 @@ public class EcommerceApiTest {
         JsonPath jsonPath = new JsonPath(addProductResponse);
         String productId = jsonPath.get("productId");
         System.out.println("Product Id is : "+productId);
+        // Now we will create the order with "CreateOrder API"
+        RequestSpecification createOrderRequestSpec = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/api/ecom")
+                .setContentType(ContentType.JSON)
+                .addHeader("Authorization", token)
+                .build();
+        // Calling the POJO classes CreateOrderApiDetails & CreateOrderApiBase
+        CreateOrderApiDetails createOrderApiDetails = new CreateOrderApiDetails();
+        createOrderApiDetails.setCountry("India");
+        createOrderApiDetails.setProductOrderedId(productId);
+        // Creating the List of CreateOrderApiDetails
+        List<CreateOrderApiDetails> orderDetailsPayload = new ArrayList<CreateOrderApiDetails>();
+        orderDetailsPayload.add(createOrderApiDetails);
+        CreateOrderApiBase createOrderApiBase = new CreateOrderApiBase();
+        createOrderApiBase.setOrders(orderDetailsPayload);
+        // Creating the request specification for CreateOrder API Request
+        RequestSpecification createOrderRequest = given().log().all().spec(createOrderRequestSpec)
+                .body(createOrderApiBase);
+        String createOrderResponse = createOrderRequest.when().post("/order/create-order")
+                .then().log().all()
+                .extract().response().asString();
+        System.out.println(createOrderResponse);
+
 
     }
 }
