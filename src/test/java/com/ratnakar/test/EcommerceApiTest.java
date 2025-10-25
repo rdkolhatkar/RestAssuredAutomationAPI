@@ -8,6 +8,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
+import org.junit.Assert;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public class EcommerceApiTest {
     @Test
     public void ecommerceApiEndToEndTest(){
        // Creating request specification which is common for all Ecommerce APIs
+       // Bypass the SSL certification
        RequestSpecification ecomApiBaseRequestSpec = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/api/ecom")
                 .setContentType(ContentType.JSON)
                 .build();
@@ -29,7 +31,7 @@ public class EcommerceApiTest {
         ecommerceApiLoginTokenRequest.setUserEmail("ratnakarkolhatkar@gmail.com");
         ecommerceApiLoginTokenRequest.setUserPassword("Ratanlord@1409");
        // Generating and Retrieving the HTTP Authorization token
-       RequestSpecification loginRequest = given().spec(ecomApiBaseRequestSpec).log().all().body(ecommerceApiLoginTokenRequest);
+       RequestSpecification loginRequest = given().relaxedHTTPSValidation().spec(ecomApiBaseRequestSpec).log().all().body(ecommerceApiLoginTokenRequest);
        // Calling the actual POST API call for Generating the Auth token using "loginRequest"
        EcommerceApiLoginTokenResponse loginResponse = loginRequest.when().post("/auth/login")
                .then().log().all()
@@ -43,7 +45,7 @@ public class EcommerceApiTest {
         RequestSpecification addProductApiRequestSpec = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/api/ecom")
                 .addHeader("Authorization", token)
                 .build();
-        RequestSpecification addProductRequest = given().log().all().spec(addProductApiRequestSpec)
+        RequestSpecification addProductRequest = given().relaxedHTTPSValidation().log().all().spec(addProductApiRequestSpec)
                 // We use .param() method for passing the "form-data" as request
                 .param("productName", "qwerty")
                 .param("productAddedBy", userId)
@@ -74,13 +76,26 @@ public class EcommerceApiTest {
         CreateOrderApiBase createOrderApiBase = new CreateOrderApiBase();
         createOrderApiBase.setOrders(orderDetailsPayload);
         // Creating the request specification for CreateOrder API Request
-        RequestSpecification createOrderRequest = given().log().all().spec(createOrderRequestSpec)
+        RequestSpecification createOrderRequest = given().relaxedHTTPSValidation().log().all().spec(createOrderRequestSpec)
                 .body(createOrderApiBase);
         String createOrderResponse = createOrderRequest.when().post("/order/create-order")
                 .then().log().all()
                 .extract().response().asString();
         System.out.println(createOrderResponse);
-
+        // Now after creating new Order we have to delete the existing product
+        // Here to delete the product we have to send the productId as Path Parameter
+        RequestSpecification deleteProductRequestSpec = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com/api/ecom")
+                .setContentType(ContentType.JSON)
+                .addHeader("Authorization", token)
+                .build();
+        RequestSpecification deleteProductRequest = given().relaxedHTTPSValidation().log().all().spec(deleteProductRequestSpec)
+                .pathParam("productId",productId);
+        String deleteProductResponse = deleteProductRequest.when().delete("/product/delete-product/{productId}")
+                .then().log().all().extract().response().asString();
+        System.out.println(deleteProductResponse);
+        JsonPath deleteProductJson = new JsonPath(deleteProductResponse);
+        String deleteProductMessage = deleteProductJson.get("message");
+        Assert.assertEquals("Product Deleted Successfully", deleteProductMessage);
 
     }
 }
