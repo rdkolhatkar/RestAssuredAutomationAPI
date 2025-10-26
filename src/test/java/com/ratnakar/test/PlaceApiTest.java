@@ -4,9 +4,8 @@ import com.ratnakar.data.AddPlaceApiPayLoad;
 import com.ratnakar.utils.JsonPathMethod;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-//import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;

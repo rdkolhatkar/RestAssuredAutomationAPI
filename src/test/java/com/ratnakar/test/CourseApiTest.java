@@ -2,8 +2,9 @@ package com.ratnakar.test;
 
 import com.ratnakar.data.CourseApiPayLoad;
 import io.restassured.path.json.JsonPath;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 
 public class CourseApiTest {
 

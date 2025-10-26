@@ -1,0 +1,13 @@
+{
+  "location": {
+    "lat": "<latitude>",
+    "lng": "<longitude>"
+  },
+  "accuracy": "<accuracy>",
+  "name": "<name>",
+  "phone_number": "(+91) 983 893 3937",
+  "address": "29, side layout, cohen 09",
+  "types": ["shoe park", "shop"],
+  "website": "http://google.com",
+  "language": "French-IN"
+}

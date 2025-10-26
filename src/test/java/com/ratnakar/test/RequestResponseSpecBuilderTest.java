@@ -1,25 +1,19 @@
 package com.ratnakar.test;
 
-import com.ratnakar.data.AddPlaceApiPayLoad;
 import com.ratnakar.pojo.AddPlaceApiLocation;
 import com.ratnakar.pojo.AddPlaceApiRequest;
-import com.ratnakar.utils.JsonPathMethod;
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import org.junit.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 public class RequestResponseSpecBuilderTest {
 

@@ -10,22 +10,20 @@ repositories {
 }
 
 dependencies {
-    implementation("net.serenity-bdd:serenity-core:4.2.34")
     implementation("io.cucumber:cucumber-java:7.23.0")
-    implementation("org.junit.jupiter:junit-jupiter")
     implementation("io.rest-assured:rest-assured:5.4.0")
-    implementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
     implementation("org.testng:testng:7.11.0")
     implementation("tools.jackson.core:jackson-databind:3.0.0") // Required for POJO class Serialization & Deserialization
+    implementation("io.cucumber:cucumber-java:7.30.0")
+    implementation("io.cucumber:cucumber-testng:7.30.0")
 
     // Testing Dependencies
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
     testImplementation("org.testng:testng:7.11.0")
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("tools.jackson.core:jackson-databind:3.0.0")
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 }
 
-test {
-    useJUnitPlatform()
-}
 
 test {
     useTestNG()
