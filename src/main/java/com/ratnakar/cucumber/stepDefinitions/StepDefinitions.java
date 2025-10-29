@@ -8,7 +8,11 @@ import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +24,10 @@ public class StepDefinitions {
 
     private AddPlaceApiRequest addPlaceApiRequest;
     private Response response;
+
+    private String addPlaceApiPayload;
+    private String baseUri;
+    private Response addPlaceResponse;
 
     @Given("the base URI is {string}")
     public void the_base_uri_is(String baseUri) {
@@ -105,6 +113,27 @@ public class StepDefinitions {
         String actualValue = jsonPath.getString(key);
         assertThat(actualValue).isEqualTo(expectedValue);
     }
-
-
+    @Given("the base URI of Place Web Service is {string}")
+    public void theBaseURIOfPlaceWebServiceIs(String uri) {
+        this.baseUri = uri;
+    }
+    @And("I read the payload template from {string}")
+    public void iReadThePayloadTemplateFrom(String filePath) throws IOException {
+        addPlaceApiPayload = new String(Files.readAllBytes(Paths.get(filePath)));
+    }
+    @When("I replace placeholders in the payload with:")
+    public void iReplacePlaceholdersInThePayloadWith(DataTable dataTable) {
+        Map<String, String> replacements = dataTable.asMap();
+        for (Map.Entry<String, String> entry : replacements.entrySet()) {
+            addPlaceApiPayload = addPlaceApiPayload.replace("<" + entry.getKey() + ">", entry.getValue());
+        }
+    }
+    @And("I send a POST API request to {string}")
+    public void iSendAPOSTAPIRequestTo(String endpoint) {
+        RequestSpecification request = RestAssured.given()
+                .baseUri(baseUri)
+                .header("Content-Type", "application/json")
+                .body(addPlaceApiPayload);
+        response = request.post(endpoint);
+    }
 }
