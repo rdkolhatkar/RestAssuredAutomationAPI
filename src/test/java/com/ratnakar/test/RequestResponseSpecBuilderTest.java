@@ -4,12 +4,17 @@ import com.ratnakar.pojo.AddPlaceApiLocation;
 import com.ratnakar.pojo.AddPlaceApiRequest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +22,14 @@ import static io.restassured.RestAssured.given;
 
 public class RequestResponseSpecBuilderTest {
 
+    // Creating the Print Stream for Logging the API request and response for troubleshooting
+    PrintStream logPrintStream = new PrintStream(new FileOutputStream("logging.txt"));
+
     // Request Spec Builder
     RequestSpecification requestSpecBuilder =  new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com")
             .addQueryParam("key", "qaclick123")
+            .addFilter(RequestLoggingFilter.logRequestTo(logPrintStream)) // adding filter for logging the API request
+            .addFilter(ResponseLoggingFilter.logResponseTo(logPrintStream)) // adding filter for logging the API response
             .setContentType(ContentType.JSON)
             .build();
     // Response Spec Builder
@@ -29,6 +39,9 @@ public class RequestResponseSpecBuilderTest {
 
     // Defining variable PlaceID
     String placeID;
+
+    public RequestResponseSpecBuilderTest() throws FileNotFoundException {
+    }
 
     @Test
     public void addPlaceApiTestAssertions(){
