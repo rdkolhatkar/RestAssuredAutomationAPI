@@ -3,6 +3,7 @@ package com.ratnakar.cucumber.stepDefinitions;
 
 import com.ratnakar.cucumber.model.AddPlaceApiLocation;
 import com.ratnakar.cucumber.model.AddPlaceApiRequest;
+import com.ratnakar.cucumber.utils.EndPointResources;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import io.restassured.RestAssured;
@@ -28,6 +29,7 @@ public class StepDefinitions {
     private String addPlaceApiPayload;
     private String baseUri;
     private Response addPlaceResponse;
+    private String placeId;
 
     @Given("the base URI is {string}")
     public void the_base_uri_is(String baseUri) {
@@ -136,4 +138,49 @@ public class StepDefinitions {
                 .body(addPlaceApiPayload);
         response = request.post(endpoint);
     }
+
+    @And("I have a valid placeId {string}")
+    public void iHaveAValidPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    @When("I invoke the Get Place API")
+    public void iInvokeTheGetPlaceAPI() {
+
+        EndPointResources apiResource = EndPointResources.valueOf("GetPlaceApi");
+        System.out.println("Get Place API Endpoint is "+apiResource.getResource());
+
+        response = RestAssured.given()
+                .log().all()
+                .baseUri(baseUri)
+                .queryParam("key", "qaclick123")
+                .queryParam("place_id", placeId)
+                .when()
+                .get(apiResource.getResource())
+                .then()
+                .log().all()
+                .extract()
+                .response();
+    }
+    @And("the response body should contain {string} as {double}")
+    public void the_response_body_should_contain_as_double(String key, Double expectedValue) {
+        JsonPath jsonPath = response.jsonPath();
+        Double actualValue = jsonPath.getDouble(key);
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+    /**
+     * Step Definition Explanation:
+     * - The regular expression "^response body should contain \"([^\"]*)\" as (.+)$" is used to match the feature file step.
+     * - \"([^\"]*)\" captures a quoted string (e.g., "accuracy") as the first parameter.
+     * - (.+) captures any value (e.g., <accuracy>) as the second parameter.
+     * - This ensures the step definition matches feature file steps like:
+     *   And response body should contain "accuracy" as <accuracy>
+     */
+    @And("^response body should contain \"([^\"]*)\" as (.+)$")
+    public void responseBodyShouldContain(String key, Integer expectedValue) {
+        JsonPath jsonPath = response.jsonPath();
+        Integer actualValue = jsonPath.getInt(key);
+        assertThat(actualValue).isEqualTo(expectedValue);
+    }
+
 }

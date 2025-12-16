@@ -11,17 +11,20 @@ import java.util.Properties;
 
 public class TestUtils {
 
-    RequestSpecification requestSpecBuilder;
+    public static RequestSpecification requestSpecBuilder;
     public RequestSpecification requestSpecification() throws IOException {
-        PrintStream logPrintStream = new PrintStream(new FileOutputStream("logging.txt"));
+        if(requestSpecBuilder == null){
+            PrintStream logPrintStream = new PrintStream(new FileOutputStream("logging.txt"));
 
-        requestSpecBuilder =  new RequestSpecBuilder().setBaseUri(getGlobalConfigurationProperties("appBaseUri"))
-                .addQueryParam("key", "qaclick123")
-                .addFilter(RequestLoggingFilter.logRequestTo(logPrintStream)) // adding filter for logging the API request
-                .addFilter(ResponseLoggingFilter.logResponseTo(logPrintStream)) // adding filter for logging the API response
-                .setContentType(ContentType.JSON)
-                .build();
+            requestSpecBuilder =  new RequestSpecBuilder().setBaseUri(getGlobalConfigurationProperties("appBaseUri"))
+                    .addQueryParam("key", "qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(logPrintStream)) // adding filter for logging the API request
+                    .addFilter(ResponseLoggingFilter.logResponseTo(logPrintStream)) // adding filter for logging the API response
+                    .setContentType(ContentType.JSON)
+                    .build();
 
+            return requestSpecBuilder;
+        }
         return requestSpecBuilder;
     }
 
