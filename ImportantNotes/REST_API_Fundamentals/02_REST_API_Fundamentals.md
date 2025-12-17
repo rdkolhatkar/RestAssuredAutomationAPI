@@ -6,7 +6,7 @@
 
 ## 📌 What is an HTTP Method?
 
-An **HTTP method** (also known as an HTTP verb) defines **the action a client wants to perform on a resource** in a REST API.
+An **HTTP method** (also called an HTTP verb) defines **what action a client wants to perform on a resource** exposed by a REST API.
 
 In REST architecture:
 
@@ -22,38 +22,42 @@ In REST architecture:
 GET /api/users/101
 ```
 
-➡️ Fetch user with ID `101`
+➡️ *Retrieve the user with ID 101*
 
 ---
 
 ## 🔑 Why HTTP Methods Are Critical in REST API Design?
 
-* Define **intent clearly**
+* Define **clear intent** (read vs write)
 * Enable **standard, predictable APIs**
-* Improve **security & caching**
-* Allow **scalability & maintainability**
-* Help tools like **Postman, browsers, gateways** behave correctly
+* Improve **security, caching, and performance**
+* Allow **scalability and maintainability**
+* Help API tools (Postman, browsers, gateways) behave correctly
 
 ---
 
 # 1️⃣ GET – Retrieve Resource (READ)
 
-![Image](https://www.researchgate.net/publication/369358390/figure/fig1/AS%3A11431281127810255%401679180216268/HTTP-request-and-response-flow.png?utm_source=chatgpt.com)
-
-![Image](https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147485434/images/315487-7af3-d17-c8af-0b4d8af188db_rest-api-model-diagram.png?utm_source=chatgpt.com)
-
 ## 🔹 Function
 
-* Retrieves data from server
-* Does **not modify server state**
+* Retrieves data from the server
+* **Does not modify server state**
 
 ---
 
-## 🔹 How GET Works (Flow)
+## 🔹 How GET Works (Flowchart)
 
 ```text
-Client → GET Request → Controller → Service → Database
-                               ← Response (JSON)
+Client
+  │
+  ▼
+GET /api/users/101
+  │
+  ▼
+Controller → Service → Database
+  │
+  ▼
+Response (200 OK + JSON)
 ```
 
 ---
@@ -78,7 +82,7 @@ GET /api/users/101
 
 ### Data After Request
 
-❌ **No change** (Read-only)
+❌ **No change** (GET is read-only)
 
 ---
 
@@ -106,15 +110,15 @@ public User getUser(@PathVariable int id) {
 
 ## 🔹 Advantages
 
-✔ Fast
+✔ Fast and efficient
+✔ Safe for retries
 ✔ Cache-friendly
-✔ Safe for repeated calls
 
 ## 🔹 Limitations
 
-❌ Cannot send sensitive data in URL
+❌ Sensitive data exposed in URL
 ❌ URL length limitation
-❌ Not for updates
+❌ Cannot modify data
 
 ---
 
@@ -122,15 +126,11 @@ public User getUser(@PathVariable int id) {
 
 * Fetch records
 * Search operations
-* Read-only endpoints
+* Read-only APIs
 
 ---
 
 # 2️⃣ POST – Create Resource (CREATE)
-
-![Image](https://svg.template.creately.com/iqrvjwja1?utm_source=chatgpt.com)
-
-![Image](https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147485434/images/315487-7af3-d17-c8af-0b4d8af188db_rest-api-model-diagram.png?utm_source=chatgpt.com)
 
 ## 🔹 Function
 
@@ -142,16 +142,22 @@ public User getUser(@PathVariable int id) {
 ## 🔹 How POST Works
 
 ```text
-Client → POST Request (JSON)
-        → Controller → Service → DB Insert
-        ← Response (201 Created)
+Client
+  │
+  ▼
+POST /api/users
+(Request Body JSON)
+  │
+  ▼
+Controller → Service → DB Insert
+  │
+  ▼
+Response (201 Created)
 ```
 
 ---
 
 ## 🔹 Postman Example
-
-### Request
 
 ```http
 POST /api/users
@@ -164,13 +170,13 @@ POST /api/users
 }
 ```
 
-### Data Before Request
+### Data Before
 
 ```json
 []
 ```
 
-### Data After Request
+### Data After
 
 ```json
 {
@@ -217,26 +223,30 @@ public User createUser(@RequestBody User user) {
 
 ---
 
-## 🔹 POST vs PUT vs PATCH
-
-| Feature          | POST | PUT | PATCH |
-| ---------------- | ---- | --- | ----- |
-| Creates resource | ✅    | ❌   | ❌     |
-| Full update      | ❌    | ✅   | ❌     |
-| Partial update   | ❌    | ❌   | ✅     |
-
----
-
 # 3️⃣ PUT – Full Resource Update
-
-![Image](https://media.licdn.com/dms/image/v2/D4D12AQHxG4Prn4ZrBQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1718998421506?e=2147483647\&t=-2LQBR1-lDFdKqTy66DNfGm4cTz7xy27k8-QYYsYaio\&v=beta\&utm_source=chatgpt.com)
-
-![Image](https://javacodehouse.com/assets/img/thumb/PUT-vs-PATCH.svg?utm_source=chatgpt.com)
 
 ## 🔹 Function
 
-* Replaces **entire resource**
-* Client must send all fields
+* Replaces the **entire resource**
+* Client must send **all fields**
+
+---
+
+## 🔹 How PUT Works
+
+```text
+Client
+  │
+  ▼
+PUT /api/users/101
+(Full Object)
+  │
+  ▼
+Controller → Service → DB Replace
+  │
+  ▼
+Response (200 OK)
+```
 
 ---
 
@@ -277,7 +287,8 @@ PUT /api/users/101
 
 ```java
 @PutMapping("/{id}")
-public User update(@PathVariable int id, @RequestBody User user) {
+public User update(@PathVariable int id,
+                   @RequestBody User user) {
     return userService.update(id, user);
 }
 ```
@@ -286,26 +297,40 @@ public User update(@PathVariable int id, @RequestBody User user) {
 
 ## 🔹 Advantages
 
-✔ Predictable
 ✔ Idempotent
-✔ Clean replacement
+✔ Predictable behavior
+✔ Clear replacement semantics
 
 ## 🔹 Limitations
 
-❌ Payload heavy
-❌ Risk of overwriting fields
+❌ Large payloads
+❌ Risk of overwriting unchanged fields
 
 ---
 
 # 4️⃣ PATCH – Partial Update (Recommended)
 
-![Image](https://learn.microsoft.com/en-us/azure/cosmos-db/media/partial-document-update/patch-multi-region-conflict-resolution.png?utm_source=chatgpt.com)
-
-![Image](https://i.sstatic.net/K7NRB.png?utm_source=chatgpt.com)
-
 ## 🔹 Function
 
-* Updates **specific fields only**
+* Updates **only specific fields**
+
+---
+
+## 🔹 How PATCH Works
+
+```text
+Client
+  │
+  ▼
+PATCH /api/users/101
+(Partial JSON)
+  │
+  ▼
+Controller → Merge Logic → DB Update
+  │
+  ▼
+Response (200 OK)
+```
 
 ---
 
@@ -356,26 +381,32 @@ public User patchUpdate(@PathVariable int id,
 ## 🔹 Advantages Over POST
 
 ✔ Smaller payload
-✔ Performance efficient
 ✔ No duplicate creation
+✔ Better performance
 
-## 🔹 Limitations
+## 🔹 Limitations of PATCH
 
-❌ Complex validation
-❌ Harder to audit
+❌ Complex validation logic
+❌ Harder to audit changes
 ❌ Not always idempotent
 
 ---
 
 # 5️⃣ DELETE – Remove Resource
 
-![Image](https://www.oreilly.com/api/v2/epubs/urn%3Aorm%3Abook%3A9781788294041/files/assets/dd386c3a-40f7-4a4e-93f8-1a663670446e.png?utm_source=chatgpt.com)
-
-![Image](https://browserstack.wpenginepowered.com/wp-content/uploads/2025/08/DELETE-Method-in-HTTP.png?utm_source=chatgpt.com)
-
 ## 🔹 Function
 
-* Deletes resource
+* Deletes a resource permanently
+
+---
+
+## 🔹 Flow
+
+```text
+Client → DELETE /api/users/101
+        → Controller → Service → DB Delete
+        ← 204 No Content
+```
 
 ---
 
@@ -408,46 +439,176 @@ DELETE /api/users/101
 
 ---
 
-# 6️⃣ HEAD – Metadata Only
+# 6️⃣ HEAD – Metadata Retrieval (Advanced)
 
-![Image](https://cdn.prod.website-files.com/610d78d90f895fbe6aef8810/646bed02a9a8ab19c58958ed_608f00f93290a12018d8d024_header1.png?utm_source=chatgpt.com)
+## 🔹 What is HEAD?
 
-![Image](https://cdn.tutsplus.com/cdn-cgi/image/width%3D537/net/uploads/legacy/511_http/http_diagram.png?utm_source=chatgpt.com)
-
-* Same as GET but **no body**
-* Used for cache checks
+`HEAD` works **exactly like GET**, but the server **returns only headers**, not the response body.
 
 ---
 
-# 7️⃣ OPTIONS – CORS & Capabilities
+## 🔹 How HEAD Works
 
-![Image](https://webperf.tips/static/9ffa09d6939aa3f1193f17e05ecd3a3e/906b5/OptimizingCORS01.png?utm_source=chatgpt.com)
-
-![Image](https://developer.chrome.com/static/blog/private-network-access-preflight/image/sequence-diagram-represe-efb5dbdcde5d7.jpg?utm_source=chatgpt.com)
-
-* Used for **CORS preflight**
-* Returns allowed methods
+```text
+Client → HEAD /api/users/101
+        → Controller → Service → DB Check
+        ← 200 OK (Headers only)
+```
 
 ---
 
-# 8️⃣ TRACE & CONNECT (Awareness)
+## 🔹 Why HEAD is Important?
 
-| Method  | Purpose | Usage      |
-| ------- | ------- | ---------- |
-| TRACE   | Debug   | ❌ Disabled |
-| CONNECT | Tunnel  | Proxy only |
+### ✔ Real-World Use Cases
+
+* Check **resource existence**
+* Validate **ETag / Last-Modified**
+* Perform **lightweight health checks**
+* Optimize **network performance**
+
+---
+
+## 🔹 HEAD vs GET
+
+| Feature       | HEAD   | GET    |
+| ------------- | ------ | ------ |
+| Response Body | ❌      | ✅      |
+| Headers       | ✅      | ✅      |
+| Performance   | Faster | Slower |
+
+---
+
+## 🔹 Spring Boot Support
+
+```java
+@RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
+public ResponseEntity<Void> headUser(@PathVariable int id) {
+    return userService.exists(id)
+            ? ResponseEntity.ok().build()
+            : ResponseEntity.notFound().build();
+}
+```
+
+---
+
+## 🔹 Limitations
+
+❌ Rarely used by developers
+❌ Often overlooked in API design
+
+---
+
+# 7️⃣ OPTIONS – Capabilities & CORS
+
+## 🔹 What is OPTIONS?
+
+`OPTIONS` tells the client **what HTTP methods are supported** for a given resource.
+
+---
+
+## 🔹 OPTIONS Flow (CORS Preflight)
+
+```text
+Browser
+  │
+  ▼
+OPTIONS /api/users
+(Preflight)
+  │
+  ▼
+Server responds:
+Allow: GET, POST, PUT, DELETE
+```
+
+---
+
+## 🔹 Why OPTIONS is Critical?
+
+✔ Mandatory for **CORS preflight**
+✔ Enforced by browsers
+✔ Prevents illegal cross-origin calls
+
+---
+
+## 🔹 Example Response
+
+```http
+Allow: GET, POST, PUT, DELETE
+Access-Control-Allow-Origin: *
+```
+
+---
+
+## 🔹 Spring Boot Handling
+
+```java
+@CrossOrigin(origins = "*")
+@RestController
+public class UserController {
+}
+```
+
+---
+
+## 🔹 Limitations
+
+❌ Mostly browser-driven
+❌ Rarely tested manually
+
+---
+
+# 8️⃣ TRACE – Debugging (Security Sensitive)
+
+## 🔹 What is TRACE?
+
+`TRACE` echoes the **exact request back to the client**.
+
+---
+
+## 🔹 How TRACE Works
+
+```text
+Client → TRACE /api/users
+        ← Request echoed back
+```
+
+---
+
+## 🔹 Why TRACE Exists?
+
+✔ Diagnostic and debugging
+✔ Proxy testing
+
+---
+
+## 🔹 Why TRACE is Disabled?
+
+❌ Vulnerable to XST attacks
+❌ Exposes headers & tokens
+
+➡️ **Always disable TRACE in production**
+
+---
+
+# 9️⃣ CONNECT – Tunneling (Awareness)
+
+* Used to establish HTTPS tunnels via proxy
+* ❌ Not used in REST APIs directly
 
 ---
 
 # 📊 HTTP Methods Summary Table
 
-| Method | Safe | Idempotent | Cacheable | Use Case       |
-| ------ | ---- | ---------- | --------- | -------------- |
-| GET    | ✅    | ✅          | ✅         | Fetch          |
-| POST   | ❌    | ❌          | ❌         | Create         |
-| PUT    | ❌    | ✅          | ❌         | Replace        |
-| PATCH  | ❌    | ⚠️         | ❌         | Partial update |
-| DELETE | ❌    | ✅          | ❌         | Remove         |
+| Method  | Safe | Idempotent | Cacheable | Use Case       |
+| ------- | ---- | ---------- | --------- | -------------- |
+| GET     | ✅    | ✅          | ✅         | Fetch          |
+| POST    | ❌    | ❌          | ❌         | Create         |
+| PUT     | ❌    | ✅          | ❌         | Replace        |
+| PATCH   | ❌    | ⚠️         | ❌         | Partial update |
+| DELETE  | ❌    | ✅          | ❌         | Remove         |
+| HEAD    | ✅    | ✅          | ✅         | Metadata       |
+| OPTIONS | ✅    | ✅          | ❌         | CORS           |
+| TRACE   | ❌    | ❌          | ❌         | Debug          |
 
 ---
 
@@ -456,31 +617,31 @@ DELETE /api/users/101
 ✔ Correct HTTP method usage
 ✔ Stateless APIs
 ✔ Meaningful status codes
-✔ Use PATCH for updates
-✔ Avoid POST misuse
+✔ PATCH for partial updates
+✔ Disable TRACE in production
 
 ---
 
 # 📚 Official Reference Documentation
 
-🔗 HTTP Methods (RFC 9110):
-[https://www.rfc-editor.org/rfc/rfc9110](https://www.rfc-editor.org/rfc/rfc9110)
+* **HTTP Semantics (RFC 9110)**
+  [https://www.rfc-editor.org/rfc/rfc9110](https://www.rfc-editor.org/rfc/rfc9110)
 
-🔗 REST API Design Guide (Microsoft):
-[https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+* **REST API Design – Microsoft**
+  [https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
 
-🔗 Spring Boot REST Docs:
-[https://docs.spring.io/spring-framework/reference/web/webmvc.html](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
+* **Spring Web MVC Documentation**
+  [https://docs.spring.io/spring-framework/reference/web/webmvc.html](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
 
 ---
 
 ## ✅ Final Conclusion
 
-Mastering HTTP methods ensures:
+Correct usage of HTTP methods leads to:
 
-✔ Clean REST design
-✔ Predictable APIs
-✔ Better performance
-✔ Industry-standard practices
+✔ Clean REST architecture
+✔ Secure APIs
+✔ Predictable behavior
+✔ Enterprise-grade Spring Boot applications
 
 ---
