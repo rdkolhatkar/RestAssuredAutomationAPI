@@ -1,368 +1,486 @@
+# 🌐 REST API Fundamentals – Complete Guide
 
-# 🌐 REST API Fundamentals
-
-## HTTP Methods – Function, Importance & Examples (Spring Boot)
+## HTTP Methods – Detailed Explanation, Design Considerations & Spring Boot Examples
 
 ---
 
 ## 📌 What is an HTTP Method?
 
-HTTP methods (also called **HTTP verbs**) define **what action a client wants to perform on a resource** exposed by a REST API.
+An **HTTP method** (also known as an HTTP verb) defines **the action a client wants to perform on a resource** in a REST API.
 
-In RESTful architecture:
+In REST architecture:
 
-* **Resources** are identified by URLs
-* **Actions** are defined by HTTP methods
+| Concept     | Description                            |
+| ----------- | -------------------------------------- |
+| Resource    | Any data object (User, Order, Product) |
+| URL         | Identifies the resource                |
+| HTTP Method | Defines the action                     |
 
-Example:
-
-```http
-GET /api/users/101
-```
-
-➡️ “Get user with ID 101”
-
----
-
-## 🔑 Why HTTP Methods Are Important?
-
-* They define **clear intent** (read, create, update, delete)
-* They enable **standardization** across APIs
-* They help with **security, caching, performance, and scalability**
-* REST APIs rely on correct HTTP method usage
-
----
-
-# 1️⃣ GET – Retrieve Data (READ)
-
-![Image](https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/146797/images/3c4fb-1b0-880c-b1aa-83f81cb80acf_rest-api-model-http-request-response.webp?utm_source=chatgpt.com)
-
-![Image](https://s3.us-west-1.wasabisys.com/idbwmedia.com/images/api/restapi_restapi.svg?utm_source=chatgpt.com)
-
-### 🔹 Function
-
-* Fetches data from the server
-* Does **NOT modify** server state
-
-### 🔹 Key Characteristics
-
-* Safe
-* Idempotent
-* Cacheable
-
-### 🔹 Example HTTP Request
+### Example
 
 ```http
 GET /api/users/101
 ```
 
-### 🔹 Spring Boot Example
+➡️ Fetch user with ID `101`
 
-```java
-@RestController
-@RequestMapping("/api/users")
-public class UserController {
+---
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
-    }
+## 🔑 Why HTTP Methods Are Critical in REST API Design?
+
+* Define **intent clearly**
+* Enable **standard, predictable APIs**
+* Improve **security & caching**
+* Allow **scalability & maintainability**
+* Help tools like **Postman, browsers, gateways** behave correctly
+
+---
+
+# 1️⃣ GET – Retrieve Resource (READ)
+
+![Image](https://www.researchgate.net/publication/369358390/figure/fig1/AS%3A11431281127810255%401679180216268/HTTP-request-and-response-flow.png?utm_source=chatgpt.com)
+
+![Image](https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147485434/images/315487-7af3-d17-c8af-0b4d8af188db_rest-api-model-diagram.png?utm_source=chatgpt.com)
+
+## 🔹 Function
+
+* Retrieves data from server
+* Does **not modify server state**
+
+---
+
+## 🔹 How GET Works (Flow)
+
+```text
+Client → GET Request → Controller → Service → Database
+                               ← Response (JSON)
+```
+
+---
+
+## 🔹 Postman Example
+
+### Request
+
+```http
+GET /api/users/101
+```
+
+### Data Before Request
+
+```json
+{
+  "id": 101,
+  "name": "Rahul",
+  "email": "rahul@gmail.com"
 }
 ```
 
-### 🔹 When to Use
+### Data After Request
 
-* Fetch single record
-* Fetch list of records
-* Search / filter data
+❌ **No change** (Read-only)
 
 ---
 
-# 2️⃣ POST – Create New Resource
+## 🔹 Spring Boot Example
 
-![Image](https://media.licdn.com/dms/image/v2/D4D12AQHxG4Prn4ZrBQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1718998421506?e=2147483647\&t=-2LQBR1-lDFdKqTy66DNfGm4cTz7xy27k8-QYYsYaio\&v=beta\&utm_source=chatgpt.com)
+```java
+@GetMapping("/{id}")
+public User getUser(@PathVariable int id) {
+    return userService.findById(id);
+}
+```
 
-![Image](https://community.retool.com/uploads/default/original/3X/b/b/bbd4b149c9928487e22304c8d0c40b36a0aa6eb9.png?utm_source=chatgpt.com)
+---
 
-### 🔹 Function
+## 🔹 Features (Design Perspective)
 
-* Sends data to the server
+| Feature      | Supported |
+| ------------ | --------- |
+| Safe         | ✅         |
+| Idempotent   | ✅         |
+| Cacheable    | ✅         |
+| Request Body | ❌         |
+
+---
+
+## 🔹 Advantages
+
+✔ Fast
+✔ Cache-friendly
+✔ Safe for repeated calls
+
+## 🔹 Limitations
+
+❌ Cannot send sensitive data in URL
+❌ URL length limitation
+❌ Not for updates
+
+---
+
+## 🔹 When to Use
+
+* Fetch records
+* Search operations
+* Read-only endpoints
+
+---
+
+# 2️⃣ POST – Create Resource (CREATE)
+
+![Image](https://svg.template.creately.com/iqrvjwja1?utm_source=chatgpt.com)
+
+![Image](https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147485434/images/315487-7af3-d17-c8af-0b4d8af188db_rest-api-model-diagram.png?utm_source=chatgpt.com)
+
+## 🔹 Function
+
 * Creates a **new resource**
+* Sends data in request body
 
-### 🔹 Key Characteristics
+---
 
-* Not idempotent
-* Request body required
-* Cannot be cached
+## 🔹 How POST Works
 
-### 🔹 Example HTTP Request
+```text
+Client → POST Request (JSON)
+        → Controller → Service → DB Insert
+        ← Response (201 Created)
+```
+
+---
+
+## 🔹 Postman Example
+
+### Request
 
 ```http
 POST /api/users
-Content-Type: application/json
+```
 
+```json
 {
   "name": "Rahul",
   "email": "rahul@gmail.com"
 }
 ```
 
-### 🔹 Spring Boot Example
+### Data Before Request
+
+```json
+[]
+```
+
+### Data After Request
+
+```json
+{
+  "id": 102,
+  "name": "Rahul",
+  "email": "rahul@gmail.com"
+}
+```
+
+---
+
+## 🔹 Spring Boot Example
 
 ```java
 @PostMapping
 public User createUser(@RequestBody User user) {
-    return userService.saveUser(user);
+    return userService.save(user);
 }
 ```
 
-### 🔹 When to Use
+---
 
-* Registration
-* Form submission
-* Insert operations
+## 🔹 Features
+
+| Feature           | Value |
+| ----------------- | ----- |
+| Idempotent        | ❌     |
+| Cacheable         | ❌     |
+| Request Body      | ✅     |
+| Resource Creation | ✅     |
 
 ---
 
-# 3️⃣ PUT – Update Entire Resource
+## 🔹 Advantages
 
-![Image](https://media.licdn.com/dms/image/v2/D5622AQGcWdCsUyG4Gg/feedshare-shrink_2048_1536/B56ZUt6N3BGUAo-/0/1740231993942?e=2147483647\&t=4SyGWljb3DsfOUqOEPgvGqJ-Y0a9eciJVhboY7futus\&v=beta\&utm_source=chatgpt.com)
+✔ Flexible payload
+✔ Supports complex objects
+✔ Ideal for inserts
 
-![Image](https://kodekloud.com/blog/content/images/2023/04/data-src-image-edb98e03-4aaf-4b27-85c3-cf6e0f4f2a7a.png?utm_source=chatgpt.com)
+## 🔹 Limitations
 
-### 🔹 Function
+❌ Duplicate records if retried
+❌ Not cacheable
 
-* Replaces the **entire resource**
-* All fields must be sent
+---
 
-### 🔹 Key Characteristics
+## 🔹 POST vs PUT vs PATCH
 
-* Idempotent
-* Full update
+| Feature          | POST | PUT | PATCH |
+| ---------------- | ---- | --- | ----- |
+| Creates resource | ✅    | ❌   | ❌     |
+| Full update      | ❌    | ✅   | ❌     |
+| Partial update   | ❌    | ❌   | ✅     |
 
-### 🔹 Example HTTP Request
+---
+
+# 3️⃣ PUT – Full Resource Update
+
+![Image](https://media.licdn.com/dms/image/v2/D4D12AQHxG4Prn4ZrBQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1718998421506?e=2147483647\&t=-2LQBR1-lDFdKqTy66DNfGm4cTz7xy27k8-QYYsYaio\&v=beta\&utm_source=chatgpt.com)
+
+![Image](https://javacodehouse.com/assets/img/thumb/PUT-vs-PATCH.svg?utm_source=chatgpt.com)
+
+## 🔹 Function
+
+* Replaces **entire resource**
+* Client must send all fields
+
+---
+
+## 🔹 Postman Example
 
 ```http
 PUT /api/users/101
+```
+
+```json
 {
   "name": "Rahul Sharma",
   "email": "rahul.sharma@gmail.com"
 }
 ```
 
-### 🔹 Spring Boot Example
+### Before
 
-```java
-@PutMapping("/{id}")
-public User updateUser(
-        @PathVariable int id,
-        @RequestBody User user) {
-    return userService.updateUser(id, user);
+```json
+{
+  "name": "Rahul",
+  "email": "rahul@gmail.com"
 }
 ```
 
-### 🔹 When to Use
+### After
 
-* Complete object replacement
-* Admin-level updates
+```json
+{
+  "name": "Rahul Sharma",
+  "email": "rahul.sharma@gmail.com"
+}
+```
 
 ---
 
-# 4️⃣ PATCH – Partial Update
+## 🔹 Spring Boot Example
 
-![Image](https://i.sstatic.net/K7NRB.png?utm_source=chatgpt.com)
-
-![Image](https://cdn.prod.website-files.com/610d78d90f895fbe6aef8810/64076186aa8de199d0516717_image002.png?utm_source=chatgpt.com)
-
-### 🔹 Function
-
-* Updates **specific fields only**
-
-### 🔹 Key Characteristics
-
-* Partial update
-* Efficient
-* Not always idempotent
-
-### 🔹 Example HTTP Request
-
-```http
-PATCH /api/users/101
-{
-  "email": "newemail@gmail.com"
+```java
+@PutMapping("/{id}")
+public User update(@PathVariable int id, @RequestBody User user) {
+    return userService.update(id, user);
 }
 ```
 
-### 🔹 Spring Boot Example
+---
+
+## 🔹 Advantages
+
+✔ Predictable
+✔ Idempotent
+✔ Clean replacement
+
+## 🔹 Limitations
+
+❌ Payload heavy
+❌ Risk of overwriting fields
+
+---
+
+# 4️⃣ PATCH – Partial Update (Recommended)
+
+![Image](https://learn.microsoft.com/en-us/azure/cosmos-db/media/partial-document-update/patch-multi-region-conflict-resolution.png?utm_source=chatgpt.com)
+
+![Image](https://i.sstatic.net/K7NRB.png?utm_source=chatgpt.com)
+
+## 🔹 Function
+
+* Updates **specific fields only**
+
+---
+
+## 🔹 Postman Example
+
+```http
+PATCH /api/users/101
+```
+
+```json
+{
+  "email": "new@gmail.com"
+}
+```
+
+### Before
+
+```json
+{
+  "name": "Rahul",
+  "email": "rahul@gmail.com"
+}
+```
+
+### After
+
+```json
+{
+  "name": "Rahul",
+  "email": "new@gmail.com"
+}
+```
+
+---
+
+## 🔹 Spring Boot Example
 
 ```java
 @PatchMapping("/{id}")
-public User updateUserPartially(
-        @PathVariable int id,
-        @RequestBody Map<String, Object> updates) {
+public User patchUpdate(@PathVariable int id,
+                        @RequestBody Map<String, Object> updates) {
     return userService.partialUpdate(id, updates);
 }
 ```
 
-### 🔹 When to Use
+---
 
-* Update one or two fields
-* Performance-sensitive APIs
+## 🔹 Advantages Over POST
+
+✔ Smaller payload
+✔ Performance efficient
+✔ No duplicate creation
+
+## 🔹 Limitations
+
+❌ Complex validation
+❌ Harder to audit
+❌ Not always idempotent
 
 ---
 
 # 5️⃣ DELETE – Remove Resource
 
-![Image](https://media.licdn.com/dms/image/v2/D4D12AQHxG4Prn4ZrBQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1718998421506?e=2147483647\&t=-2LQBR1-lDFdKqTy66DNfGm4cTz7xy27k8-QYYsYaio\&v=beta\&utm_source=chatgpt.com)
+![Image](https://www.oreilly.com/api/v2/epubs/urn%3Aorm%3Abook%3A9781788294041/files/assets/dd386c3a-40f7-4a4e-93f8-1a663670446e.png?utm_source=chatgpt.com)
 
-![Image](https://bezkoder.com/wp-content/uploads/2020/04/django-rest-api-tutorial-example-delete-method-one.png?utm_source=chatgpt.com)
+![Image](https://browserstack.wpenginepowered.com/wp-content/uploads/2025/08/DELETE-Method-in-HTTP.png?utm_source=chatgpt.com)
 
-### 🔹 Function
+## 🔹 Function
 
-* Deletes resource from server
+* Deletes resource
 
-### 🔹 Key Characteristics
+---
 
-* Idempotent
-* No request body
-
-### 🔹 Example HTTP Request
+## 🔹 Postman Example
 
 ```http
 DELETE /api/users/101
 ```
 
-### 🔹 Spring Boot Example
+### Before
 
-```java
-@DeleteMapping("/{id}")
-public void deleteUser(@PathVariable int id) {
-    userService.deleteUser(id);
-}
+```json
+{ "id": 101 }
 ```
 
-### 🔹 When to Use
+### After
 
-* Remove records
-* Cleanup operations
+```json
+❌ Resource removed
+```
+
+---
+
+## 🔹 Features
+
+| Feature      | Supported |
+| ------------ | --------- |
+| Idempotent   | ✅         |
+| Request Body | ❌         |
 
 ---
 
 # 6️⃣ HEAD – Metadata Only
 
-![Image](https://docs.trafficserver.apache.org/en/latest/_images/http_header_struct.jpg?utm_source=chatgpt.com)
+![Image](https://cdn.prod.website-files.com/610d78d90f895fbe6aef8810/646bed02a9a8ab19c58958ed_608f00f93290a12018d8d024_header1.png?utm_source=chatgpt.com)
 
-![Image](https://i0.wp.com/automatenow.io/wp-content/uploads/2023/10/http-request-methods.png?resize=744%2C1024\&ssl=1\&utm_source=chatgpt.com)
+![Image](https://cdn.tutsplus.com/cdn-cgi/image/width%3D537/net/uploads/legacy/511_http/http_diagram.png?utm_source=chatgpt.com)
 
-### 🔹 Function
-
-* Same as GET but **no response body**
-
-### 🔹 Use Cases
-
-* Check resource existence
-* Cache validation
-* Health checks
-
-```http
-HEAD /api/users/101
-```
+* Same as GET but **no body**
+* Used for cache checks
 
 ---
 
-# 7️⃣ OPTIONS – Supported Operations (CORS)
+# 7️⃣ OPTIONS – CORS & Capabilities
 
-![Image](https://i.sstatic.net/6jsKY.png?utm_source=chatgpt.com)
+![Image](https://webperf.tips/static/9ffa09d6939aa3f1193f17e05ecd3a3e/906b5/OptimizingCORS01.png?utm_source=chatgpt.com)
 
-![Image](https://howtodoinjava.com/wp-content/uploads/2019/05/Spring-MVC-Options-request-handler.png?utm_source=chatgpt.com)
+![Image](https://developer.chrome.com/static/blog/private-network-access-preflight/image/sequence-diagram-represe-efb5dbdcde5d7.jpg?utm_source=chatgpt.com)
 
-### 🔹 Function
-
-* Returns allowed HTTP methods
-
-### 🔹 Importance
-
-* Required for **CORS preflight**
-* Browser security mechanism
-
-```http
-OPTIONS /api/users
-```
+* Used for **CORS preflight**
+* Returns allowed methods
 
 ---
 
-# 8️⃣ TRACE – Debugging
+# 8️⃣ TRACE & CONNECT (Awareness)
 
-### 🔹 Function
-
-* Echoes request back to client
-
-### 🔹 Status
-
-* ❌ Disabled in most production systems (security risk)
-
----
-
-# 9️⃣ CONNECT – Tunneling
-
-### 🔹 Function
-
-* Establishes a tunnel (HTTPS via proxy)
-
-### 🔹 Usage
-
-* Browser / proxy communication
-* Not used in REST APIs directly
+| Method  | Purpose | Usage      |
+| ------- | ------- | ---------- |
+| TRACE   | Debug   | ❌ Disabled |
+| CONNECT | Tunnel  | Proxy only |
 
 ---
 
 # 📊 HTTP Methods Summary Table
 
-| Method  | Purpose        | Request Body | Idempotent | Common Usage     |
-| ------- | -------------- | ------------ | ---------- | ---------------- |
-| GET     | Read data      | ❌            | ✅          | Fetch records    |
-| POST    | Create         | ✅            | ❌          | Insert data      |
-| PUT     | Full update    | ✅            | ✅          | Replace resource |
-| PATCH   | Partial update | ✅            | ⚠️         | Modify fields    |
-| DELETE  | Remove         | ❌            | ✅          | Delete record    |
-| HEAD    | Metadata       | ❌            | ✅          | Validation       |
-| OPTIONS | Capabilities   | ❌            | ✅          | CORS             |
-| TRACE   | Debug          | ❌            | ❌          | Testing          |
-| CONNECT | Tunnel         | ❌            | ❌          | HTTPS proxy      |
+| Method | Safe | Idempotent | Cacheable | Use Case       |
+| ------ | ---- | ---------- | --------- | -------------- |
+| GET    | ✅    | ✅          | ✅         | Fetch          |
+| POST   | ❌    | ❌          | ❌         | Create         |
+| PUT    | ❌    | ✅          | ❌         | Replace        |
+| PATCH  | ❌    | ⚠️         | ❌         | Partial update |
+| DELETE | ❌    | ✅          | ❌         | Remove         |
 
 ---
 
-# 🔁 REST API CRUD Mapping
+# 🧩 Spring Boot REST Design Best Practices
 
-```text
-GET    /users        → Read all users
-GET    /users/{id}   → Read single user
-POST   /users        → Create user
-PUT    /users/{id}   → Update user
-PATCH  /users/{id}   → Partial update
-DELETE /users/{id}   → Delete user
-```
+✔ Correct HTTP method usage
+✔ Stateless APIs
+✔ Meaningful status codes
+✔ Use PATCH for updates
+✔ Avoid POST misuse
 
 ---
 
-# 🎯 Best Practices
+# 📚 Official Reference Documentation
 
-✔ Use correct HTTP methods
-✔ Follow REST naming conventions
-✔ Return proper HTTP status codes
-✔ Avoid misuse of GET for updates
-✔ Use PATCH for partial updates
+🔗 HTTP Methods (RFC 9110):
+[https://www.rfc-editor.org/rfc/rfc9110](https://www.rfc-editor.org/rfc/rfc9110)
+
+🔗 REST API Design Guide (Microsoft):
+[https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)
+
+🔗 Spring Boot REST Docs:
+[https://docs.spring.io/spring-framework/reference/web/webmvc.html](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
 
 ---
 
-## ✅ Conclusion
+## ✅ Final Conclusion
 
-Understanding HTTP methods is **fundamental to REST API design**.
-Correct usage ensures:
+Mastering HTTP methods ensures:
 
-* Clean architecture
-* Better security
-* Scalability
-* Maintainability
+✔ Clean REST design
+✔ Predictable APIs
+✔ Better performance
+✔ Industry-standard practices
 
 ---
