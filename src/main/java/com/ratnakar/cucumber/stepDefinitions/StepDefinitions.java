@@ -1,6 +1,8 @@
 package com.ratnakar.cucumber.stepDefinitions;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.ratnakar.cucumber.model.AddPlaceApiLocation;
 import com.ratnakar.cucumber.model.AddPlaceApiRequest;
 import com.ratnakar.cucumber.utils.EndPointResources;
@@ -10,11 +12,13 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,8 +103,11 @@ public class StepDefinitions {
     }
 
     @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(Integer expectedStatus) {
+    public void the_response_status_code_should_be(Integer expectedStatus) throws JsonProcessingException {
         assertThat(response.statusCode()).isEqualTo(expectedStatus);
+        ObjectMapper objectMapper = new ObjectMapper();
+        HashMap<String, Object> responseMap = objectMapper.readValue(response.asString(), new TypeReference<HashMap<String, Object>>() {});
+        placeId = (String) responseMap.get("place_id");
     }
 
     @And("the response body should contain {string} as {string}")
@@ -139,9 +146,9 @@ public class StepDefinitions {
         response = request.post(endpoint);
     }
 
-    @And("I have a valid placeId {string}")
-    public void iHaveAValidPlaceId(String placeId) {
-        this.placeId = placeId;
+    @And("I have a valid placeId")
+    public void iHaveAValidPlaceId() {
+        System.out.println("The extracted place_id value after a successful Add Place API call is: "+placeId);
     }
 
     @When("I invoke the Get Place API")

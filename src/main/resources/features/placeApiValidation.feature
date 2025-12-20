@@ -1,4 +1,4 @@
-@AddPlaceApi
+@PlaceApi
 Feature: Validate Place API
 
   Scenario Outline: Validate Add Place API with dynamic test data
@@ -18,7 +18,7 @@ Feature: Validate Place API
 
   Scenario Outline: Validate Get Place API response with dynamic placeId
     Given the base URI of Place Web Service is "https://rahulshettyacademy.com"
-    And I have a valid placeId "<placeId>"
+    And I have a valid placeId
     When I invoke the Get Place API
     Then the response status code should be 200
     And the response body should contain "location.lat" as <latitude>
@@ -33,6 +33,6 @@ Feature: Validate Place API
     And the response body should contain "language" as "<language>"
 
     Examples:
-      | placeId            | latitude   | longitude | accuracy | name            | phoneNumber        | address                   | type1     | type2 | website           | language  |
-      | e5Y1g7x0Q1oZxk9QKp | -38.383494 | 33.427362 | 50       | Frontline house | (+91) 983 893 3937 | 29, side layout, cohen 09 | shoe park | shop  | http://google.com | French-IN |
+       | latitude   | longitude | accuracy | name            | phoneNumber        | address                   | type1     | type2 | website           | language  |
+       | -38.383494 | 33.427362 | 50       | Frontline house | (+91) 983 893 3937 | 29, side layout, cohen 09 | shoe park | shop  | http://google.com | French-IN |
 
