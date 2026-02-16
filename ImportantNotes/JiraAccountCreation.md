@@ -1,77 +1,285 @@
-Jira API
----
+# 🚀 Jira API Setup & Integration Guide
+### Project: Ratnakar Agile Works
 
-# Part A — Create a free Atlassian / Jira account
+This guide explains:
 
-1. **Open the Jira signup page.**
-   Go to Atlassian’s Cloud signup (the “Get started / Try Jira” page). This is the official place to create a free Jira account. ([Atlassian][1])
-
-2. **Choose how to sign up.**
-   You can sign up with a work email (recommended) or use Google / Microsoft / Apple / Slack single-sign-on. Enter your email and follow the prompts. (Atlassian encourages using a work email to help find teammates.) ([Atlassian][1])
-
-3. **Verify your email.**
-   Atlassian will send a verification email — click the verification link in that message to confirm your account. If you don’t see it, check spam. ([Atlassian Support][2])
-
-4. **Pick products and finish setup.**
-   After verification, you’ll be prompted to pick products (choose **Jira Software**). The free tier is available and doesn’t require a credit card — it supports up to 10 users and includes basic storage & community support. ([Atlassian][3])
-
-5. **Sign in to your new Jira Cloud site.**
-   You’ll get a site like `your-team.atlassian.net` — sign in and you’ll arrive at the Jira dashboard.
+- How to create a free Jira Cloud account
+- How to create a Scrum project
+- How to generate a Jira REST API token
+- How to integrate Jira API using:
+   - Postman
+   - cURL
+   - Java (HttpClient)
 
 ---
 
-# Part B — Create a Scrum project named **Ratnakar Agile Works**
+# 📌 Part 1 — Create Free Jira Cloud Account
 
-> **Tip:** For small/independent teams or easiest setup, use a **Team-managed (Next-gen)** Scrum project. If your company uses centralized admin controls and needs shared schemes, pick **Company-managed**. Team-managed is simpler for self-configuration. ([Atlassian Support][4])
+## Step 1: Sign Up
 
-1. **Open “Create project”.**
-   From the Jira top navigation, click **Projects → Create project** (or the big “Create project” button on your dashboard). ([Atlassian Support][5])
+Go to:
 
-2. **Choose the project type / template.**
+👉 https://www.atlassian.com/software/jira/free
 
-    * In the modal, select **Software** (if shown) and then choose the **Scrum** template (you can preview it).
-    * If prompted, choose **Team-managed** (recommended for quick, independent setup) or **Company-managed** if your org requires that. ([Atlassian][6])
+- Choose **Jira Software**
+- Select **Free Plan**
+- No credit card required
+- Supports up to 10 users
 
-3. **Name the project.**
-   In the “Project name” field type:
+After signup, your site will look like:
 
-   ```
-   Ratnakar Agile Works
-   ```
-
-   Jira will suggest a **Project key** (usually an uppercase short code). You can accept or edit it (e.g., `RAW` or `RATNAKAR`). The project key becomes issue prefixes (e.g., `RAW-1`). ([Atlassian Support][5])
-
-4. **Confirm and create.**
-   Click **Create** (or **Create project**). Jira will create the project and open its Scrum board and backlog for you.
-
-5. **Verify the project layout (Backlog & Board).**
-   Your new Scrum project will have a **Backlog** (where you add and prioritize issues), a **Board** (visual sprint board), and planning tools like sprints and reports. If a board isn’t visible, you can create one and base it on the project (Create → Board → Create a Scrum board). ([Atlassian Support][7])
+```
+https://your-team.atlassian.net
+```
 
 ---
 
-# Quick next steps inside the new project (short checklist)
+# 📌 Part 2 — Create Scrum Project
 
-* **Add issues (stories/tasks):** Backlog → Create issue.
-* **Create an Epic(s):** Use “Create” and set issue type = Epic.
-* **Create a Sprint:** In Backlog, click **Create sprint**, drag issues into it, then **Start sprint**.
-* **Invite teammates:** Use the top-right **Invite** or project **People** settings and add their emails. (Free plan allows up to 10 users.) ([Atlassian][3])
+## Create Project
+
+1. Go to **Projects → Create Project**
+2. Select:
+   - **Software**
+   - **Scrum**
+   - Choose **Team-managed** (recommended)
+3. Project Name:
+
+```
+Ratnakar Agile Works
+```
+
+4. Choose Project Key:
+```
+RAW
+```
+
+5. Click **Create**
+
+Your project will now include:
+- Backlog
+- Scrum board
+- Sprint planning
+- Reports
 
 ---
 
-# Handy tips & troubleshooting
+# 📌 Part 3 — Generate Jira REST API Token
 
-* **Can’t see “Create project”?** You might lack permissions for company-managed projects — try creating a **team-managed** project (any user can create team-managed projects) or ask your Jira admin. ([Atlassian Support][5])
-* **Project type choice:** If you’re just starting, **team-managed Scrum** is easiest; choose **company-managed** only if you need standardized workflows or admin-level controls. ([Atlassian Support][4])
-* **Free plan limits:** Free tier supports up to **10 users**, limited storage (2 GB), and community support. If you expect a larger team or need advanced features, consider upgrading later. ([Atlassian][3])
-* **If invited teammates don’t get mail:** Ask them to check spam and verify their Atlassian account; you can resend invites from Project → People. ([Atlassian Support][2])
+Jira Cloud uses **API Tokens** instead of passwords.
+
+## Step 1: Open API Token Page
+
+Go to:
+
+👉 https://id.atlassian.com/manage-profile/security/api-tokens
+
+## Step 2: Create Token
+
+1. Click **Create API Token**
+2. Give it a name (e.g., `JiraAPI`)
+3. Click **Create**
+4. Copy the generated token (save it securely)
+
+⚠️ You will not be able to see it again.
 
 ---
 
-# Short summary (one-line)
+# 📌 Part 4 — Jira REST API Authentication
 
-1. Sign up at Atlassian (free, no card). ([Atlassian][1])
-2. Projects → Create project → choose **Scrum** → choose **Team-managed** → name it **Ratnakar Agile Works** → Create. ([Atlassian Support][5])
+Jira Cloud uses:
+
+```
+Basic Authentication
+```
+
+Where:
+
+- Username = Your Atlassian email
+- Password = API Token
+
+Authorization Header:
+
+```
+Authorization: Basic Base64(email:api_token)
+```
 
 ---
 
+# 📌 Part 5 — Test Jira API Using cURL
 
+## Example 1: Get All Projects
+
+```bash
+curl -u your-email@example.com:your_api_token \
+  -X GET \
+  -H "Accept: application/json" \
+  https://your-team.atlassian.net/rest/api/3/project
+```
+
+---
+
+## Example 2: Create an Issue
+
+```bash
+curl -u your-email@example.com:your_api_token \
+  -X POST \
+  -H "Content-Type: application/json" \
+  https://your-team.atlassian.net/rest/api/3/issue \
+  --data '{
+    "fields": {
+      "project": {
+        "key": "RAW"
+      },
+      "summary": "Test issue created via API",
+      "description": "Creating an issue using REST API",
+      "issuetype": {
+        "name": "Task"
+      }
+    }
+  }'
+```
+
+---
+
+# 📌 Part 6 — Test Jira API Using Postman
+
+## Step 1: Create Request
+
+- Method: `GET`
+- URL:
+
+```
+https://your-team.atlassian.net/rest/api/3/project
+```
+
+## Step 2: Authorization Tab
+
+- Type: **Basic Auth**
+- Username: your email
+- Password: API Token
+
+## Step 3: Send Request
+
+You should receive a JSON response listing projects.
+
+---
+
+# 📌 Part 7 — Java Integration Example
+
+Below example uses Java 11+ HttpClient.
+
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Base64;
+
+public class JiraApiExample {
+
+    public static void main(String[] args) throws Exception {
+
+        String email = "your-email@example.com";
+        String apiToken = "your_api_token";
+        String jiraUrl = "https://your-team.atlassian.net/rest/api/3/project";
+
+        String auth = email + ":" + apiToken;
+        String encodedAuth = Base64.getEncoder().encodeToString(auth.getBytes());
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(jiraUrl))
+                .header("Authorization", "Basic " + encodedAuth)
+                .header("Accept", "application/json")
+                .GET()
+                .build();
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpResponse<String> response =
+                client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+```
+
+---
+
+# 📌 Common API Endpoints
+
+| Operation | Endpoint |
+|-----------|----------|
+| Get all projects | `/rest/api/3/project` |
+| Get issue | `/rest/api/3/issue/{issueKey}` |
+| Create issue | `/rest/api/3/issue` |
+| Search issues | `/rest/api/3/search` |
+| Get users | `/rest/api/3/users/search` |
+
+Full Documentation:  
+👉 https://developer.atlassian.com/cloud/jira/platform/rest/v3/
+
+---
+
+# 📌 Best Practices
+
+- Never hardcode API tokens in production
+- Store credentials in environment variables
+- Use HTTPS always
+- Rotate API tokens periodically
+
+---
+
+# 📌 Example Environment Variables
+
+### Windows (PowerShell)
+
+```powershell
+setx JIRA_EMAIL "your-email@example.com"
+setx JIRA_TOKEN "your_api_token"
+```
+
+### Mac/Linux
+
+```bash
+export JIRA_EMAIL="your-email@example.com"
+export JIRA_TOKEN="your_api_token"
+```
+
+---
+
+# 📌 Project Structure Example (Automation Framework)
+
+```
+jira-api-project/
+│
+├── src/
+│   └── JiraApiExample.java
+│
+├── pom.xml
+└── README.md
+```
+
+---
+
+# 🎯 Final Outcome
+
+After completing this guide, you will:
+
+- Have a Jira Cloud account
+- Have a Scrum project (Ratnakar Agile Works)
+- Be able to authenticate via API token
+- Create and fetch Jira issues via:
+   - cURL
+   - Postman
+   - Java code
+
+---
+
+# 👨‍💻 Author
+
+Ratnakar Kolhatkar  
+Automation Engineer | API & UI Testing Enthusiast
+
+---
+
+⭐ If this guide helped you, consider starring the repository!
