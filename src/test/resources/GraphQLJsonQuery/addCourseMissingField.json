@@ -1,0 +1,13 @@
+{
+  "query": "mutation CreateCourseBroken($input: CourseInput!) { createCourse(input: $input) { id courseName } }",
+  "variables": {
+    "input": {
+      "category": "API Testing",
+      "price": 10,
+      "language": "Java",
+      "email": "broken@test.com",
+      "stack": "WEB",
+      "teachingAssists": []
+    }
+  }
+}

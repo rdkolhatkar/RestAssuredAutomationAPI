@@ -1,0 +1,6 @@
+{
+  "query": "query GetCourseById($id: ID) { getCourse(id: $id) { id courseName category price language email stack } }",
+  "variables": {
+    "id": "{{courseId}}"
+  }
+}

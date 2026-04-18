@@ -1,0 +1,14 @@
+{
+  "query": "mutation CreateCourse($input: CourseInput!) { createCourse(input: $input) { id courseName category price language email stack } }",
+  "variables": {
+    "input": {
+      "courseName": "RestAssured + TestNG Mastery",
+      "category": "API Testing",
+      "price": 40,
+      "language": "Java",
+      "email": "test@rahulshettyacademy.com",
+      "stack": "WEB",
+      "teachingAssists": []
+    }
+  }
+}

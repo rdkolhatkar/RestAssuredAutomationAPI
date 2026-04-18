@@ -1,0 +1,3 @@
+{
+  "query": "query GetAllCourses { courses { id courseName category price language email stack } }"
+}
