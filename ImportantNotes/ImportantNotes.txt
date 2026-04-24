@@ -75,3 +75,58 @@ Ecommerce API
 GraphQL API for practice
 Url: https://rahulshettyacademy.com/gq/graphql
 Note: If you create a graphql API server then by default you will get graphql explorer User Interface (UI)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OAuth2 Rahul Shetty Academy
+
++---------------------------+------------------------------------------------------------------+
+| Field                     | Value                                                            |
++---------------------------+------------------------------------------------------------------+
+| GrantType                 | Authorization code                                               |
++---------------------------+------------------------------------------------------------------+
+| Redirect URL/Callback URL | https://rahulshettyacademy.com/getCourse.php                     |
++---------------------------+------------------------------------------------------------------+
+| Authorization Server URL  | https://accounts.google.com/o/oauth2/v2/auth                     |
++---------------------------+------------------------------------------------------------------+
+| Access Token URL/ Actual  | https://www.googleapis.com/oauth2/v4/token                       |
+| Resource Owner Endpoint   |                                                                  |
++---------------------------+------------------------------------------------------------------+
+| Client ID                 | 692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.              |
+|                           | googleusercontent.com                                            |
++---------------------------+------------------------------------------------------------------+
+| Client Secret             | erZOWM9g3UtwNRj340YYaK_W                                         |
++---------------------------+------------------------------------------------------------------+
+| Scope                     | https://www.googleapis.com/auth/userinfo.email                   |
++---------------------------+------------------------------------------------------------------+
+| State                     | Any random string                                                |
++---------------------------+------------------------------------------------------------------+
+| How to Pass OAuth         | Headers                                                          |
++---------------------------+------------------------------------------------------------------+
+| Response Type             | code                                                             |
++---------------------------+------------------------------------------------------------------+
+
+1) Here our client server is "rahulshettyacademy.com" and Resource Authorization Server is "accounts.google.com", and resource owner is "Human" who is trying t access the website "https://rahulshettyacademy.com/getCourse.php"
+2) In OAuth 2.0, the backend implementation of grant type means how your server (Authorization Server + Resource Server) handles different ways a client gets an access token. A grant type defines how the client proves identity and gets authorization.
+3) Common grant types are:
+   -> Authorization Code
+   -> Client Credentials
+   -> Password (legacy / mostly avoided now)
+   -> Refresh Token
+   -> Device Code (for TVs, IoT, etc.)
+4) Scope : "scope" is nothing but application or client is asking what details it need from that owner, here owner is Human who wants to login into the client which is in our case "rahulshettyacademy.com"
+5) Authorization Server URL : "auth_url" is a third party service like google, facebook etc. which will provide the identity verification for the "Human" who is trying t access the website "https://rahulshettyacademy.com/getCourse.php"
+6) Client ID : "client_id" is a unique key or identity value, which will be generated when our client website "rahulshettyacademy.com" is first time registering with the third party identity verification provider services like "accounts.google.com", "facebook.com/dialog/oauth" etc.
+7) Response Type : "response_type" is a unique one time password (OTP) or Code which we have to send for identity verification
+8) Redirect URL/Callback URL : "redirect_uri" is a URL which will navigate back to the parent website or parent client which is in our case "rahulshettyacademy.com"
+9) State : "state" is nothing but a unique encrypted token sent by the Human and should match with token registered with client server "rahulshettyacademy.com" and  Authorization Server "accounts.google.com", This is mainly used for security purpose to avoid An API hijacking attack.
+10) Final Authorization URL to get the access code = Authorization Server URL + ? + scope=${Scope} + auth_url=${Authorization Server URL} + client_id=${Client ID} + response_type=${Response Type} + redirect_uri=${Redirect URL/Callback URL} + state=${State}
+    Example: https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&auth_url=https://accounts.google.com/o/oauth2/v2/auth&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&response_type=code&redirect_uri=https://rahulshettyacademy.com/getCourse.php
+11) Now hit this above example 'Final Authorization URL' on your chrome browser and login with Google account. Once it is completed you will receive the Authorization Code in your browser URL but your web page will be a blank page.
+12) Once you successfully logged in that OTP or Auth Code will be present in your browser URL, now copy that URL carefully and
+    Example: https://rahulshettyacademy.com/getCourse.php?iss=https%3A%2F%2Faccounts.google.com&code=4%2F0Aci98E_In9-uM3FtM8tPy5rjvflX6fFQZKEHhffqgzDgrBWDbQtFfY9e3CxDBsxzO-jXoA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent
+13) In this above example URL, "code=4%2F0Aci98E_In9-uM3FtM8tPy5rjvflX6fFQZKEHhffqgzDgrBWDbQtFfY9e3CxDBsxzO-jXoA" line is our code and "4%2F0Aci98E_In9-uM3FtM8tPy5rjvflX6fFQZKEHhffqgzDgrBWDbQtFfY9e3CxDBsxzO-jXoA" this value is our OTP. NOTE: & character is not the part of code
+14) Now after carefully copying the code or OTP our next step is to call actual Google Auth Server for Identity Verification of the Human who is trying to access the client Url "rahulshettyacademy.com"
+15) Actual Resource Owner Endpoint or  Access Token URL is nothing but the Endpoint which fill generate the final access token after identity verification, in our case it is "https://www.googleapis.com/oauth2/v4/token"
+16) Now we have to build the access token endpoint which is a POST request and it is concatenation of "Actual Resource Owner Endpoint + code=${Code} + client_id=${Client ID} + client_secret=${Client Secret} + redirect_uri=${Redirect URL/Callback URL} + grant_type=${GrantType}
+    Example: https://www.googleapis.com/oauth2/v4/token?code=4%2F0Aci98E-kLK_vNF7-4jOPraQU_XOlME2odBr8DW2ZmubcImk25N_kvJuSTyz5AImpceadYA&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&client_secret=erZOWM9g3UtwNRj340YYaK_W&redirect_uri=https://rahulshettyacademy.com/getCourse.php&grant_type=authorization_code#
+17) Client Secret in OAuth 2.0 is a confidential password-like key used by the application (client) to prove its identity to the authorization server when requesting an access token.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

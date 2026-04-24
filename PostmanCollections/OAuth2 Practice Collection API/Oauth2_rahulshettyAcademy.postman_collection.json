@@ -1,0 +1,210 @@
+{
+  "info": {
+    "_postman_id": "618a975d-f6c9-4a0b-91bf-9193edda179d",
+    "name": "Oauth2_rahulshettyAcademy",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19864596",
+    "_collection_link": "https://go.postman.co/collection/19864596-618a975d-f6c9-4a0b-91bf-9193edda179d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GetCode",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&auth_url=https://accounts.google.com/o/oauth2/v2/auth&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&response_type=code&redirect_uri=https://rahulshettyacademy.com/getCourse.php",
+          "protocol": "https",
+          "host": [
+            "accounts",
+            "google",
+            "com"
+          ],
+          "path": [
+            "o",
+            "oauth2",
+            "v2",
+            "auth"
+          ],
+          "query": [
+            {
+              "key": "scope",
+              "value": "https://www.googleapis.com/auth/userinfo.email"
+            },
+            {
+              "key": "auth_url",
+              "value": "https://accounts.google.com/o/oauth2/v2/auth"
+            },
+            {
+              "key": "client_id",
+              "value": "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com"
+            },
+            {
+              "key": "response_type",
+              "value": "code"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://rahulshettyacademy.com/getCourse.php"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Access Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://www.googleapis.com/oauth2/v4/token?code=4%2F0Aci98E-kLK_vNF7-4jOPraQU_XOlME2odBr8DW2ZmubcImk25N_kvJuSTyz5AImpceadYA&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&client_secret=erZOWM9g3UtwNRj340YYaK_W&redirect_uri=https://rahulshettyacademy.com/getCourse.php&grant_type=authorization_code#",
+          "protocol": "https",
+          "host": [
+            "www",
+            "googleapis",
+            "com"
+          ],
+          "path": [
+            "oauth2",
+            "v4",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "code",
+              "value": "4%2F0Aci98E-kLK_vNF7-4jOPraQU_XOlME2odBr8DW2ZmubcImk25N_kvJuSTyz5AImpceadYA"
+            },
+            {
+              "key": "client_id",
+              "value": "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com"
+            },
+            {
+              "key": "client_secret",
+              "value": "erZOWM9g3UtwNRj340YYaK_W"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://rahulshettyacademy.com/getCourse.php"
+            },
+            {
+              "key": "grant_type",
+              "value": "authorization_code"
+            },
+            {
+              "key": "scope",
+              "value": "https://www.googleapis.com/auth/userinfo.email",
+              "disabled": true
+            },
+            {
+              "key": "response_type",
+              "value": "code",
+              "disabled": true
+            },
+            {
+              "key": "authuser",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "prompt",
+              "value": "consent",
+              "disabled": true
+            }
+          ],
+          "hash": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Acutal Request",
+      "request": {
+        "auth": {
+          "type": "oauth2",
+          "oauth2": [
+            {
+              "key": "addTokenTo",
+              "value": "header",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rahulshettyacademy.com/getCourse.php?access_token={{access_token}}",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "getCourse.php"
+          ],
+          "query": [
+            {
+              "key": "access_token",
+              "value": "{{access_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getAccessCodeOTP",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://rahulshettyacademy.com/getCourse.php?iss=https%3A%2F%2Faccounts.google.com&code=4%2F0Aci98E_In9-uM3FtM8tPy5rjvflX6fFQZKEHhffqgzDgrBWDbQtFfY9e3CxDBsxzO-jXoA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "getCourse.php"
+          ],
+          "query": [
+            {
+              "key": "iss",
+              "value": "https%3A%2F%2Faccounts.google.com"
+            },
+            {
+              "key": "code",
+              "value": "4%2F0Aci98E_In9-uM3FtM8tPy5rjvflX6fFQZKEHhffqgzDgrBWDbQtFfY9e3CxDBsxzO-jXoA"
+            },
+            {
+              "key": "scope",
+              "value": "email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid"
+            },
+            {
+              "key": "authuser",
+              "value": "0"
+            },
+            {
+              "key": "prompt",
+              "value": "consent"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
